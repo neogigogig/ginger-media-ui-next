@@ -7,6 +7,7 @@ import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import { Paper, Typography, Box } from '@mui/material';
 import Link from 'next/link';
 import './style.css';
+import { useTheme, useMediaQuery } from '@mui/material';
 
 
 const FilterData: React.FC = () => {
@@ -15,7 +16,8 @@ const FilterData: React.FC = () => {
   const [busData, setBusData] = useState<any[]>([]); // Update the type if you know the structure
   const [displayedDataCount, setDisplayedDataCount] = useState<number>(12);
   const [loading, setLoading] = useState<boolean>(false);
-
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   useEffect(() => {
     const fetchData = async () => {
       const currentUrl = window.location.href;
@@ -62,11 +64,11 @@ const FilterData: React.FC = () => {
   };
 
   return (
-    <div className="listing" style={{ marginRight: '44px' }}>
+    <div className="listing" style={{ marginRight: '44px',marginLeft:isMobile?"4.4rem":"6rem" }}>
       {busData &&
         Array.isArray(busData) &&
         busData.slice(0, displayedDataCount).map((shelter, index) => (
-          <Paper key={shelter.id} className="paper">
+          <Paper key={shelter.id} className="paper" >
             <Link
               href={`/Details/${shelter.Id}`}
               style={{

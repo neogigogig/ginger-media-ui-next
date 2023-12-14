@@ -4,18 +4,24 @@ import React, { useState, useEffect, MouseEvent } from "react";
 import { Button, SvgIcon, Menu, MenuItem, Checkbox, Chip } from "@mui/material";
 import Link from 'next/link';
 import SearchIcon from "@mui/icons-material/Search";
+import { useRouter } from 'next/navigation'
+import { useTheme, useMediaQuery } from '@mui/material';
+import { wrap } from "module";
 
 const FilterSearch = () => {
+  const router=useRouter();
   const [selectedDropdown, setSelectedDropdown] = useState<string>("");
   const [selectedOptions, setSelectedOptions] = useState<{ [key: string]: string[] }>({});
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [city, setCity] = useState<string>('Chennai');
+  const [city, setCity] = useState<string>('');
  
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [searchVal, setSearchVal] = useState<boolean>(false);
   const [value, setValue] = useState<string>('');
-
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   useEffect(() => {
+    
     // Use the 'searchValueFromUrl' to set the initial search term
     // if (searchValueFromUrl) {
     //   setSearchTerm(searchValueFromUrl);
@@ -30,6 +36,7 @@ const FilterSearch = () => {
 
   const handleClick = () => {
     console.log(value);
+    router.push(`./search?=${value}`)
     // const updatedURL = `/search?search=${value}`;
     // navigate(updatedURL, { replace: true });
   };
@@ -143,8 +150,8 @@ const FilterSearch = () => {
   };
 
   return (
-    <div style={{ marginLeft: '12rem', marginTop: '3rem', justifyContent: 'space-between' }}>
-      <div className="dropdown-filter" style={{ marginRight: '0px' }}>
+    <div style={{  marginTop: '3rem', justifyContent: '',display:isMobile?"":"flex" }}>
+      <div className="dropdown-filter" style={{ paddingLeft:isMobile?"3rem": '5rem' }}>
         {dropdowns.map((dropdown, index) => (
           <div key={index}>
             <Button
@@ -195,34 +202,21 @@ const FilterSearch = () => {
             </Menu>
           </div>
         ))}
-        <div>
+       
           <div style={{ display: 'flex' }}>
             <Link href={`/FilterData/${city}`}>
               <Button color="primary" variant="contained">
                 Apply Filter
               </Button>
             </Link>
-            <div className="search-bar" style={{ marginLeft: "4rem", justifyContent: 'flex-end' }}>
-              <input
-                type="search"
-                className="input"
-                placeholder=" Search...."
-                onChange={handleSearch}
-                value={value}
-                style={{ fontSize: 15 }}
-              />
-
-              <div className="hello">
-                <SearchIcon className="search-icon" onClick={handleClick} />
-              </div>
-            </div>
-          </div>
+           
+          
         </div>
-
+       
       </div>
 
       {/* Display selected options as chips */}
-      <div style={{ marginTop: '10px', display: 'flex', gap: '8px' }}>
+      <div style={{ marginTop: '10px', display: 'flex' ,gap: '8px',flexWrap:'wrap',marginLeft:"4rem" }}>
         {Object.entries(selectedOptions).map(([dropdown, options]) => (
           options
             .filter((option) => option !== "")  // Exclude empty strings
@@ -236,6 +230,20 @@ const FilterSearch = () => {
             ))
         ))}
       </div>
+      <div className="search-bar" style={{ marginLeft: "4.4rem", justifyContent: 'flex-end',marginTop:isMobile?"2rem":"" }}>
+              <input
+                type="search"
+                className="input"
+                placeholder=" Search...."
+                onChange={handleSearch}
+                value={value}
+                style={{ fontSize: 15 }}
+              />
+
+              <div className="hello">
+                <SearchIcon className="search-icon" onClick={handleClick} />
+              </div>
+            </div>
     </div>
   );
 };

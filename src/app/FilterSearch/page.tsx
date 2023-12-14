@@ -212,11 +212,7 @@ const FilterSearch = () => {
            
           
         </div>
-       
-      </div>
-
-      {/* Display selected options as chips */}
-      <div style={{ marginTop: '10px', display: 'flex' ,gap: '8px',flexWrap:'wrap',marginLeft:"4rem" }}>
+        <div style={{ marginTop: '10px', display: 'flex' ,gap: '8px',flexWrap:'wrap',marginLeft:"4rem" }}>
         {Object.entries(selectedOptions).map(([dropdown, options]) => (
           options
             .filter((option) => option !== "")  // Exclude empty strings
@@ -230,6 +226,11 @@ const FilterSearch = () => {
             ))
         ))}
       </div>
+       
+      </div>
+
+      {/* Display selected options as chips */}
+     
       <div className="search-bar" style={{ marginLeft: "4.4rem", justifyContent: 'flex-end',marginTop:isMobile?"2rem":"" }}>
               <input
                 type="search"

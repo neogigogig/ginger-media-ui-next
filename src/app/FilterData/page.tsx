@@ -64,11 +64,11 @@ const FilterData: React.FC = () => {
   };
 
   return (
-    <div className="listing" style={{ marginRight: '44px',marginLeft:isMobile?"4.4rem":"6rem" }}>
+    <div className="listing" style={{ marginRight: '44px',marginLeft:isMobile?"4.4rem":"3rem" }}>
       {busData &&
         Array.isArray(busData) &&
         busData.slice(0, displayedDataCount).map((shelter, index) => (
-          <Paper key={shelter.id} className="paper" >
+          <Paper key={shelter.id} className="paper" style={{width:isMobile?"fit-content":"270px"}}>
             <Link
               href={`/Details/${shelter.Id}`}
               style={{

@@ -76,6 +76,7 @@ const Details: React.FC<DetailsProps> = ({ params }) => {
             <Paper>
               <Paper
                 style={{
+                  marginTop:'2.2rem',
                   backgroundColor: "#ff6702",
                   display: "flex",
                   alignItems: "center",
@@ -107,7 +108,7 @@ const Details: React.FC<DetailsProps> = ({ params }) => {
                       <div className="image_div">
                         <Image
                           className="img"
-                          src={"/hoarding"}
+                          src={"/hoarding.png"}
                           alt="hoardings"
                           height={35}
                           width={35}

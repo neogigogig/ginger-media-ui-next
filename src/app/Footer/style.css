@@ -1,0 +1,172 @@
+/* Footer container */
+
+.footer {
+    background-color: black;
+    color: white;
+    
+    /* display: flex; */
+    /* margin-top: 5rem; */
+    /* justify-content: space-between; */
+    /* padding: 20px; */
+    /* min-width: 600px;
+     width:100%; 
+    /* overflow-x: hidden; */
+  }
+ 
+  .container{
+    /* background-color: purple; */
+    background-color: black;
+    display: flex;
+  
+  flex-wrap: wrap;
+  justify-content: space-between;
+    padding-top:5rem;
+    /* min-width: 300px; */
+    /* width: 100%; */
+}
+  
+@media screen and (max-width:900px) {
+  .left-section{
+    margin-top: 4rem;
+    margin-left: 0px;
+    padding-left: 0px;
+    /* margin-right: 2rem; */
+  }
+  .middle-section{
+    margin-top:5rem;
+       margin-left: 8rem;
+  }
+  .right-section{
+    margin-top: 5rem;
+    margin-left: 3rem;
+  }
+  
+}
+@media screen and (max-width:544px) {
+  .container{
+       padding-right: 8rem;
+  }
+}
+  
+  
+  .border{
+    margin-top: 35px;
+  }
+  
+  /* Left section */
+  .left-section {
+    width: auto; 
+    padding-left:4rem;
+    /* display: flex;  */
+    /* display: flex; */
+    /* flex-direction: column;
+   
+    
+    /* align-items: center; */
+    /* text-align: center; */
+    /* flex-direction: row; */
+    /* margin-right: 50px; */
+    
+  }
+  .left_img{
+      margin-left:12rem;
+      margin-top:0rem;
+  }
+  
+  /* Social icons */
+  .social-icons {
+    
+    
+    /* margin-top: 2rem; */
+    width:350px;
+    align-items: center;
+    justify-content: space-between;
+    
+    
+  }
+  .social-icons {
+
+  }
+  
+  .title{
+    font-size: 15px;
+     color: #BABABA;
+     margin-top: 2rem;
+  }
+  /* Middle section */
+  .middle-section {
+    /* margin-top: 3rem; */
+    text-align: left;
+    /* padding-left: 55px; */
+    /* flex-grow: 1; */
+    transition: color 0.3s;
+    color: white; 
+  }
+  .icon:hover{
+    text-decoration: underline;
+    cursor:pointer;
+  }
+  
+  .p1{
+    margin-top: 25px;
+    color: #d1d1d1;
+    font-size: 15px;
+  }
+  .p1:hover {
+    color: orange;
+    cursor:pointer; /* Change text color to orange on hover */
+  }
+  /* Services in bold */
+  .bold {
+    font-weight: bold;
+    
+  }
+  .bold2{
+    padding-left: 5rem;
+  }
+  
+  /* Right section */
+  .right-section {
+   
+    flex-shrink: 0;
+    color: white;
+    margin-right:4rem;
+  }
+  .icon{
+    margin-top:25px;
+  }
+ .lastline{
+  margin-top: 4rem;;
+  width: 100%;
+  /* margin-left: 2rem; */
+ } 
+.lastline ul{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+
+}
+.lastline ul li{
+  list-style: none;
+  color: white;
+  margin-right:2rem;
+}
+.lastline ul li:hover{
+  color: #ff6702;
+  cursor:pointer;
+}
+.foot p{
+
+  text-align: center;
+  padding-top:60px;
+  color: #BABABA;
+}  
+
+.foot{
+  /* background-color: black; */
+  
+  height: 120px;
+  align-items: center;
+  justify-content: center;
+ 
+}

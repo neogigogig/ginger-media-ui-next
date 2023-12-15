@@ -61,6 +61,7 @@ const FilterSearch = () => {
 
   const handlefilter=()=>{
     console.log(city);
+    
     router.push(`./filter/${city}`)
   }
   const dropdowns = [

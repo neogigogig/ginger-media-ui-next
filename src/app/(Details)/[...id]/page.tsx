@@ -84,16 +84,16 @@ const Details: React.FC<DetailsProps> = ({ params }) => {
                 }}
                 className="section1"
               >
-                <div className="image">
+                
                   <Image
                     src={data.Image}
                     width={1500}
-                    height={200}
+                    height={380}
                     className="main_img"
                     alt="Bus with hoarding"
                     style={{ borderRadius: "10px" }}
                   />
-                </div>
+               
                 <div
                   style={{
                     textAlign: "center",
@@ -118,7 +118,7 @@ const Details: React.FC<DetailsProps> = ({ params }) => {
                         <p className="name1" style={{}}>
                           {data.MediaType}
                         </p>
-                        <p className="name_media">MEDIATYPE</p>
+                        <p className="name_media" style={{marginTop:'20px'}}>MEDIATYPE</p>
                       </div>
                     </div>
                     <div style={{ display: "flex" }}>
@@ -132,8 +132,8 @@ const Details: React.FC<DetailsProps> = ({ params }) => {
                         />
                       </div>
                       <div>
-                        <p className="name1">data_Illumination</p>
-                        <p className="name_light">LIGHTING</p>
+                        <p className="name1" >data_Illumination</p>
+                        <p className="name_light" style={{marginTop:'20px'}}>LIGHTING</p>
                       </div>
                     </div>
                   </div>

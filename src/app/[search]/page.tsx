@@ -6,12 +6,11 @@ import { Paper, Container,Typography ,Box} from "@mui/material";
 import Link from 'next/link'
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import "./Listing.css";
-
+import FilterSearch from "../[FilterSearch]/page";
 import { Button } from "@mui/material";
 import { useTheme, useMediaQuery } from '@mui/material';
 import { styled } from '@mui/material/styles';
-const SearchData: React.FC  = () => {
-  
+const SearchData: React.FC  = (params) => {
   
 
   const [busData, setBusData] = useState<any[]>([]);
@@ -59,19 +58,22 @@ const SearchData: React.FC  = () => {
       setLoading(false);
     }
   };
+  console.log(params)
+console.log(params.params.search)
 
   useEffect(() => {
+    
     const currentUrl = window.location.href;
      console.log(currentUrl)
       // Extract the data you need from the URL
-      const [, query] = currentUrl.split('?='); // Assuming the query parameters are after the "?" in the URL
-      const params = new URLSearchParams(query);
+      const [, query] = currentUrl.split('?search='); // Assuming the query parameters are after the "?" in the URL
+      const param = new URLSearchParams(query);
       console.log(query)
-      const city = params.get('search');
+      const city = param.get('search');
       console.log(city)
     // Set the initial search value from the URL
     setSearchValue(query || "bangalore");
-  }, [window.location.href]);
+  }, [params]);
 
   useEffect(() => {
     if (searchValue === "") {
@@ -97,9 +99,10 @@ const SearchData: React.FC  = () => {
   };
 
   return (
-    
+    <div>
+       <FilterSearch/>
     <div className="listing" style={{marginRight:'44px'}}>
-      
+     
       {busData && busData.slice(0, displayedDataCount).map((shelter: any) => (
         <Paper key={shelter.id} className="paper" style={{marginLeft:isMobile?"30px":""}}>
           <Link
@@ -134,14 +137,14 @@ const SearchData: React.FC  = () => {
               <span className="price">{shelter.Price}</span>
             </div>
             <div>
-              <Typography style={{ marginLeft: "99px" }}>
+              <Typography style={{ marginLeft: "29px" }}>
                 {shelter.AreaSqFt} sq.ft
               </Typography>
             </div>
           </Link>
         </Paper>
       ))}
-      {loading && <div className="loading">Loading more data...</div>}
+      {loading && <div className="loading"></div>}
       {displayedDataCount < busData.length && !loading && (
         <div className="buttonLoad" >
           <button onClick={handleLoadMore} disabled={loading} className="button1">
@@ -149,7 +152,7 @@ const SearchData: React.FC  = () => {
           </button>
         </div>
       )}
-    </div>
+    </div></div>
    
   );
 };

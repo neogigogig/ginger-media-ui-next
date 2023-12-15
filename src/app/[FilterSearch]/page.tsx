@@ -13,20 +13,38 @@ const FilterSearch = () => {
   const [selectedDropdown, setSelectedDropdown] = useState<string>("");
   const [selectedOptions, setSelectedOptions] = useState<{ [key: string]: string[] }>({});
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [city, setCity] = useState<string>('');
- 
+  const [city, setCity] = useState<string[]>([]);
+  
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [searchVal, setSearchVal] = useState<boolean>(false);
   const [value, setValue] = useState<string>('');
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+
+  
   useEffect(() => {
-    
-    // Use the 'searchValueFromUrl' to set the initial search term
-    // if (searchValueFromUrl) {
-    //   setSearchTerm(searchValueFromUrl);
-    //   setSearchVal(true);
-    // }
+    const currentUrl = window.location.href;
+    const [, query] = currentUrl.split('?');
+    const paramo = decodeURIComponent(query);
+    const param = new URLSearchParams(paramo);
+
+    const initialSelectedOptions: { [key: string]: string[] } = {};
+    const initialCity: { [key: string]: string[] } = {};
+
+    dropdowns.forEach((dropdown) => {
+      const paramName = dropdown.name;
+      const paramValue = param.get(paramName);
+
+      if (paramValue) {
+        const values = paramValue.split(',');
+        initialSelectedOptions[paramName] = values;
+        initialCity[paramName] = values;
+      }
+    });
+
+    setSelectedOptions(initialSelectedOptions);
+    setCity(initialCity);
   }, []);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,11 +54,15 @@ const FilterSearch = () => {
 
   const handleClick = () => {
     console.log(value);
-    router.push(`./search?=${value}`)
+    router.push(`./search?search=${value}`)
     // const updatedURL = `/search?search=${value}`;
     // navigate(updatedURL, { replace: true });
   };
 
+  const handlefilter=()=>{
+    console.log(city);
+    router.push(`./filter/${city}`)
+  }
   const dropdowns = [
     {
       name: "MediaType",
@@ -78,11 +100,11 @@ const FilterSearch = () => {
           ? [...prevSelectedOptions[selectedDropdown], option]
           : [option],
       };
-
+       
       const queryParams = Object.entries(updatedOptions)
         .map(([key, values]) => `${key}=${values.join(",")}`)
         .join("&");
-
+      
       const link = `${queryParams ? `?${queryParams}` : ""}`;
       setCity(link);
 
@@ -150,6 +172,7 @@ const FilterSearch = () => {
   };
 
   return (
+   
     <div style={{  marginTop: '3rem', justifyContent: '',display:isMobile?"":"flex" }}>
       <div className="dropdown-filter" style={{ paddingLeft:isMobile?"3rem": '5rem' }}>
         {dropdowns.map((dropdown, index) => (
@@ -204,15 +227,34 @@ const FilterSearch = () => {
         ))}
        
           <div style={{ display: 'flex' }}>
-            <Link href={`/FilterData/${city}`}>
-              <Button color="primary" variant="contained">
+            {/* <Link href={`/filter/${city}`}> */}
+              <Button color="primary" variant="contained" onClick={handlefilter}>
                 Apply Filter
               </Button>
-            </Link>
+            {/* </Link> */}
            
           
         </div>
-        <div style={{ marginTop: '10px', display: 'flex' ,gap: '8px',flexWrap:'wrap',marginLeft:"4rem" }}>
+        
+      </div>
+
+      {/* Display selected options as chips */}
+     
+      <div className="search-bar" style={{ marginLeft: "4.4rem", justifyContent: 'flex-end',marginBottom:isMobile?"1rem":"" }}>
+              <input
+                type="search"
+                className="input"
+                placeholder=" Search...."
+                onChange={handleSearch}
+                value={value}
+                style={{ fontSize: 15 }}
+              />
+
+              <div className="hello">
+                <SearchIcon className="search-icon" onClick={handleClick} />
+              </div>
+            </div>
+            <div style={{ marginTop: '10px', display: 'flex' ,gap: '8px',flexWrap:'wrap',marginLeft:"4rem" }}>
         {Object.entries(selectedOptions).map(([dropdown, options]) => (
           options
             .filter((option) => option !== "")  // Exclude empty strings
@@ -227,24 +269,6 @@ const FilterSearch = () => {
         ))}
       </div>
        
-      </div>
-
-      {/* Display selected options as chips */}
-     
-      <div className="search-bar" style={{ marginLeft: "4.4rem", justifyContent: 'flex-end',marginTop:isMobile?"2rem":"" }}>
-              <input
-                type="search"
-                className="input"
-                placeholder=" Search...."
-                onChange={handleSearch}
-                value={value}
-                style={{ fontSize: 15 }}
-              />
-
-              <div className="hello">
-                <SearchIcon className="search-icon" onClick={handleClick} />
-              </div>
-            </div>
     </div>
   );
 };

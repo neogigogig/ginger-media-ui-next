@@ -37,7 +37,7 @@
       }
 }
 
-.name1,.name_media,.name_light,.qli,.styleline2{
+.name1,.name_media,.name_light,.qli,.styleline2,.img,.img2{
     @media screen and (max-width:565px) {
         display:none;
       }
@@ -196,13 +196,14 @@
       }
 }
 .image{
-      width:550px;
+      width:40rem;
+      height:10rem;
       
 }
 
 .image {
     @media screen and (max-width:963px) {
-        width:130px
+        width:540px
       }
     
 }

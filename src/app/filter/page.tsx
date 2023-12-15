@@ -8,9 +8,9 @@ import { Paper, Typography, Box } from '@mui/material';
 import Link from 'next/link';
 import './style.css';
 import { useTheme, useMediaQuery } from '@mui/material';
+import FilterSearch from '../[FilterSearch]/page';
 
-
-const FilterData: React.FC = () => {
+const FilterData: React.FC = (params) => {
   const [mediaType, setMediaType] = useState<string>('');
   const [city, setCity] = useState<string>('');
   const [busData, setBusData] = useState<any[]>([]); // Update the type if you know the structure
@@ -18,15 +18,23 @@ const FilterData: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  console.log(params.searchParams)
+  console.log("filter")
   useEffect(() => {
     const fetchData = async () => {
       const currentUrl = window.location.href;
-
-      // Extract the data you need from the URL
-      const [, query] = currentUrl.split('?'); // Assuming the query parameters are after the "?" in the URL
-      const params = new URLSearchParams(query);
-      const city = params.get('City');
-      const mediaType = params.get('MediaType');
+      console.log(currentUrl)
+      
+      const [, query] = currentUrl.split('?');
+      console.log(query)
+      const paramo = decodeURIComponent(query);
+      const param = new URLSearchParams(paramo);
+     
+      console.log(param)
+      const city = param.get('City');
+      const mediaType = param.get('MediaType');
+      console.log(mediaType)
+      console.log(city);
       setMediaType(mediaType || '');
       setCity(city || '');
 
@@ -52,7 +60,7 @@ const FilterData: React.FC = () => {
     };
 
     fetchData();
-  }, [window.location.href]);
+  }, [params.searchParams,window.location.href]);
 
   const handleLoadMore = () => {
     if (Array.isArray(busData)) {
@@ -64,7 +72,10 @@ const FilterData: React.FC = () => {
   };
 
   return (
+    <div>
+       <FilterSearch/>
     <div className="listing" style={{ marginRight: '44px',marginLeft:isMobile?"4.4rem":"3rem" }}>
+     
       {busData &&
         Array.isArray(busData) &&
         busData.slice(0, displayedDataCount).map((shelter, index) => (
@@ -101,7 +112,7 @@ const FilterData: React.FC = () => {
                 <span className="price">{shelter.Price}</span>
               </div>
               <div>
-                <Typography style={{ marginLeft: '99px' }}>
+                <Typography style={{ marginLeft: '19px' }}>
                   {shelter.AreaSqFt} sq.ft
                 </Typography>
               </div>
@@ -116,6 +127,7 @@ const FilterData: React.FC = () => {
           </button>
         </div>
       )}
+    </div>
     </div>
   );
 };

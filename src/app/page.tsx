@@ -1,17 +1,17 @@
 'use client'
-import FilterData from './FilterData/page'
+
 import React, { useState } from 'react';
-import FilterSearch from './FilterSearch/page'
+import FilterSearch from './[FilterSearch]/page'
 import PaginatedData from './PaginatedData/page';
 
-
+import FilterData from './filter/page';
 const Page: React.FC = () => {
  
 
   return (
     <section>
-         <FilterSearch/>
-      <FilterData/>
+         
+         <FilterData/>
     </section>
   );
 };

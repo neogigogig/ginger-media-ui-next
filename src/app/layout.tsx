@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import FilterSearch from './FilterSearch/page'
+
 import Footer from './Footer/page';
 import Header from './Header/page';
 const inter = Inter({ subsets: ['latin'] })
@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en">
        <Header/>
          
-    
+       
         <div style={{minHeight:'30vh'}}>{children}</div>
        
           <Footer/>

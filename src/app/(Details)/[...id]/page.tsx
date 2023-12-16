@@ -23,45 +23,51 @@ interface DetailsProps {
   };
 }
 
-const Details: React.FC<DetailsProps> = ({ params }) => {
+// eslint-disable-next-line @next/next/no-async-client-component
+const Details: React.FC<DetailsProps> = async ({ params }) => {
+  
   var shelterId = params.id;
-  const [data, setData] = useState<any>(null);
-
-  console.log({ shelterId });
-  console.log(shelterId[1])
   shelterId=shelterId[1];
-  const krPuramLatitude = 28.613;
-  const krPuramLongitude = 77.6876;
-  const krPuramAddress = 'Krishnarajapuram, Bangalore';
+  // const [data, setData] = useState<any>(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `https://gjbq17jks3.execute-api.us-east-1.amazonaws.com/dev/getGmgById/${shelterId}`
-        );
-        if (response.ok) {
-          console.log("connected");
-          const jsonData = await response.json();
-          setData(jsonData[0]);
-          console.log("Fetched data:", jsonData);
-        } else {
-          console.error("Failed to fetch data");
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+    const response = await fetch(
+      `https://gjbq17jks3.execute-api.us-east-1.amazonaws.com/dev/getGmgById/${shelterId}`
+    );
+ 
+    const jsonData = await response.json();
+    const data = jsonData[0];
+      
+  
 
-    fetchData();
-  }, [shelterId]);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  });
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `https://gjbq17jks3.execute-api.us-east-1.amazonaws.com/dev/getGmgById/${shelterId}`
+  //       );
+  //       if (response.ok) {
+  //         console.log("connected");
+  //         const jsonData = await response.json();
+  //         setData(jsonData[0]);
+  //         console.log("Fetched data:", jsonData);
+  //       } else {
+  //         console.error("Failed to fetch data");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
 
-  const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  //   fetchData();
+  // }, [shelterId]);
+
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // });
+
+  // const theme = useTheme();
+  // const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <>
@@ -210,11 +216,11 @@ const Details: React.FC<DetailsProps> = ({ params }) => {
               style={{ marginTop: "45px" }}
             >
               <Grid item xs={12} sm={10} md={8} lg={6}>
-                <Paper elevation={3} style={{ padding: theme.spacing(2) }}>
+                <Paper elevation={3} style={{ padding: 14 }}>
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.5403924821444!2d77.68999402484195!3d13.001221987316892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae110edafdb9ab%3A0x3b68346de02a8f79!2sDiesel%20Loco%20Shed%2C%20S.W%20Railway!5e0!3m2!1sen!2sin!4v1699968680601!5m2!1sen!2sin"
                     width="100%"
-                    height={isSmallScreen ? '300px' : '450px'}
+                    height={'450px'}
                     style={{ border: "0" }}
                     allowFullScreen={true}
                     loading="lazy"
@@ -227,7 +233,7 @@ const Details: React.FC<DetailsProps> = ({ params }) => {
             <Paper
               className="choice"
               elevation={3}
-              style={{ width: isSmallScreen ? "400px" : '400px', height: 'auto' }}
+              style={{ width: '400px', height: 'auto' }}
             >
               <div className="Top_choice">
                 <h3 style={{ marginLeft: '17px', marginRight: '17px', marginTop: '15px' }}>Top Choice</h3>

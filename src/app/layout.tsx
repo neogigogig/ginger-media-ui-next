@@ -22,7 +22,7 @@ export default function RootLayout({
          
        
         <div style={{minHeight:'30vh'}}>{children}</div>
-       
+      
           <Footer/>
     </html>
   )

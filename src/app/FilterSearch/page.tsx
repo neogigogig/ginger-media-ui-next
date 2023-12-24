@@ -20,39 +20,19 @@ const FilterSearch = () => {
   const [value, setValue] = useState<string>('');
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-
+ 
 
   
-  useEffect(() => {
-    const currentUrl = window.location.href;
-    const [, query] = currentUrl.split('?');
-    const paramo = decodeURIComponent(query);
-    const param = new URLSearchParams(paramo);
 
-    const initialSelectedOptions: { [key: string]: string[] } = {};
-    const initialCity: { [key: string]: string[] } = {};
-
-    dropdowns.forEach((dropdown) => {
-      const paramName = dropdown.name;
-      const paramValue = param.get(paramName);
-
-      if (paramValue) {
-        const values = paramValue.split(',');
-        initialSelectedOptions[paramName] = values;
-        initialCity[paramName] = values;
-      }
-    });
-
-    setSelectedOptions(initialSelectedOptions);
-    setCity(initialCity);
-  }, []);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("hello")
     setValue(e.target.value);
+    console.log(value);
     setSearchVal(true);
   };
 
-  const handleClick = () => {
+  const handleClick = async() => {
     console.log(value);
     router.push(`./search?search=${value}`)
     // const updatedURL = `/search?search=${value}`;
@@ -107,7 +87,7 @@ const FilterSearch = () => {
         .join("&");
       
       const link = `${queryParams ? `?${queryParams}` : ""}`;
-      setCity(link);
+      setCity([link]);
 
       return updatedOptions; // Return the updated state
     });
@@ -127,7 +107,7 @@ const FilterSearch = () => {
         .join("&");
 
       const link = `${queryParams ? `?${queryParams}` : ""}`;
-      setCity(link);
+      setCity([link]);
 
       return updatedOptions; // Return the updated state
     });
@@ -166,7 +146,7 @@ const FilterSearch = () => {
         .join("&");
 
       const link = `${queryParams ? `?${queryParams}` : ""}`;
-      setCity(link);
+      setCity([link]);
 
       return updatedOptions;
     });
@@ -245,7 +225,7 @@ const FilterSearch = () => {
               <input
                 type="search"
                 className="input"
-                placeholder=" Search...."
+                placeholder=" Search here...."
                 onChange={handleSearch}
                 value={value}
                 style={{ fontSize: 15 }}

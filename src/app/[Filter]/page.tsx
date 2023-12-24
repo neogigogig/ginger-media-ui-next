@@ -1,49 +1,41 @@
-import { getSearchGmgData } from "../getSearchGmgData/page";
-import { Paper, Container, Typography, Box } from "@mui/material";
-import Link from "next/link";
+import { getFilterGmgData } from "../getFilterGmgData/page";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
-import "./Listing.css";
+import { Paper, Typography, Box } from "@mui/material";
+import Link from "next/link";
+import "./style.css";
+
 import FilterSearch from "../FilterSearch/page";
-import { Button } from "@mui/material";
-import { useTheme, useMediaQuery } from "@mui/material";
-import { styled } from "@mui/material/styles";
-const SearchData: React.FC = async (params) => {
-  console.log(params);
-  // const [searchValue, setSearchValue] = useState("");
-  // const [loading, setLoading] = useState(false);
-  const displayedDataCount = 12;
 
-  // ..
+const FilterData: React.FC = async (params) => {
+  
+  var displaydatacount = 12;
+   
+  //  const currentUrl = window.location.href;
+  //  const [, query] = currentUrl.split('?');
+  //  const paramo = decodeURIComponent(query);
+  //   const param = new URLSearchParams(paramo);
+  //  const city = params.searchParams?params.searchParams.MediaType:"Hoardings";
+  //   const mediaType = params.searchParams?params.searchParams.City:"Bangalore";
 
-  // const currentUrl = window.location.href;
-  // console.log(currentUrl)
-  //  // Extract the data you need from the URL
-  //  const [, query] = currentUrl.split('?search='); // Assuming the query parameters are after the "?" in the URL
-  //  const param = new URLSearchParams(query);
-  //  console.log(query)
-  //  // const city = param.get('search');
-  //  // console.log(city)
-  // // Set the initial search value from the URL
-  // setSearchValue(query || "bangalore");
-  const searchValue = "Bangalore";
+     const city="Bangalore";
+     const mediaType="Hoardings"
+  
 
-  const response: any = await getSearchGmgData(searchValue);
+  const response = await getFilterGmgData({
+    MediaType: mediaType || "",
+    City: city || "",
+  });
+
   const data = await response.json();
 
-  // useEffect(() => {
-  //   if (busData.length > 0) {
-  //     setDisplayedDataCount(Math.min(10, busData.length));
-  //   }
-  // }, [busData]);
-
-  // const handleLoadMore = () => {
-  //   const newDisplayedDataCount = displayedDataCount + 10;
-  //   if (newDisplayedDataCount < busData.length) {
-  //     setDisplayedDataCount(newDisplayedDataCount);
-  //   } else {
-  //     setDisplayedDataCount(busData.length);
-  //   }
-  // };
+  const handleLoadMore = () => {
+    if (Array.isArray(data)) {
+      const newDisplayedDataCount = displaydatacount + 12;
+      if (newDisplayedDataCount <= data.length) {
+        displaydatacount = newDisplayedDataCount;
+      }
+    }
+  };
 
   return (
     <div>
@@ -52,9 +44,9 @@ const SearchData: React.FC = async (params) => {
         className="listing"
         style={{ marginRight: "44px", marginLeft: "3rem" }}
       >
-        {displayedDataCount &&
+        {displaydatacount &&
           Array.isArray(data) &&
-          data.slice(0, displayedDataCount).map((shelter, index) => (
+          data.slice(0, displaydatacount).map((shelter, index) => (
             <div key={shelter.id} className="paper" style={{ width: "270px" }}>
               <Link
                 href={`/Details/${shelter.Id}`}
@@ -96,9 +88,10 @@ const SearchData: React.FC = async (params) => {
             </div>
           ))}
 
-        {displayedDataCount < data.length && <div className="buttonLoad"></div>}
+        {displaydatacount < data.length && <div className="buttonLoad"></div>}
       </div>
     </div>
   );
 };
-export default SearchData;
+
+export default FilterData;

@@ -84,9 +84,7 @@
     
     
   }
-  .social-icons {
-
-  }
+  
   
   .title{
     font-size: 15px;
@@ -138,7 +136,7 @@
  .lastline{
   margin-top: 4rem;;
   width: 100%;
-  /* margin-left: 2rem; */
+  padding-left: 2rem;
  } 
 .lastline ul{
   justify-content: center;

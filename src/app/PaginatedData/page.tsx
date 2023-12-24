@@ -1,34 +1,35 @@
-// Import necessary dependencies and components
 'use client'
 
 import React, { useState, useEffect } from "react";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import Link from 'next/link'
+import Link from "next/link";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import "./Listing.css";
-import { Box, CircularProgress } from "@mui/material";
-import { useTheme, useMediaQuery } from "@mui/material"
+import { Box,CircularProgress, Container } from "@mui/material";
+import { useTheme,useMediaQuery } from "@mui/material"
 import { Button } from "@mui/material";
 
-// Define the data item interface
+
+
+// import Cart from "../Cart/Cart";
 interface DataItem {
   id: string;
   address: string;
 }
 
-// Main component definition
+
 function PaginatedData() {
   const [page, setPage] = useState<number>(1);
   const [busData, setBusData] = useState<DataItem[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [initialLoadComplete, setInitialLoadComplete] =
     useState<boolean>(false);
-  const [hasMoreData, setHasMoreData] = useState<boolean>(true);
+    
+
 
   const pageSize = 12;
 
-  // Function to fetch data from the API
   const fetchData = async (currentPage: number) => {
     try {
       setLoading(true);
@@ -43,10 +44,6 @@ function PaginatedData() {
       );
 
       const jsonData: DataItem[] = await response.json();
-      if (jsonData.length === 0) {
-        setHasMoreData(false);
-      }
-
       if (currentPage === 1) {
         setBusData(jsonData);
         setInitialLoadComplete(true);
@@ -61,38 +58,35 @@ function PaginatedData() {
     }
   };
 
-  // Function to handle "Load More" button click
+const addcart=(()=>{
+     
+})
+  
+       
+const theme = useTheme();
+const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+const containerStyles: React.CSSProperties = {
+display: 'flex',
+alignItems: 'center',
+justifyContent: 'center',
+marginTop: '4rem',
+flexDirection: isMobile ? 'column' : 'row',
+marginLeft:isMobile ? '8px' : '0px',
+};
+  useEffect(() => {
+    fetchData(page);
+  }, []);
+
   const handleLoadMore = () => {
     fetchData(page);
   };
 
-  // Use MUI theme and media query for responsive styling
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const containerStyles: React.CSSProperties = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: '4rem',
-    flexDirection: isMobile ? 'column' : 'row',
-    marginLeft: isMobile ? '8px' : '0px',
-  };
-
-  // useEffect hook to fetch data on component mount
-  useEffect(() => {
-    // Only fetch data if initialLoadComplete is false
-    if (!initialLoadComplete) {
-      fetchData(page);
-    }
-  }, [initialLoadComplete]);
-
-  // Render the component JSX
   return (
     <Box>
       <div className="listing" style={containerStyles}>
         {initialLoadComplete ? (
           busData.map((shelter: any) => (
-            <Paper key={shelter.Image} className="paper">
+            <Paper key={shelter.Image} className="paper" >
               <Link
                 href={`/details/${shelter.Id}`}
                 style={{
@@ -102,9 +96,41 @@ function PaginatedData() {
                   height: "100%",
                 }}
               >
-                {/* ... (rest of your code) */}
+                <div className="imageWrapper">
+                  <img
+                    src={shelter.Image}
+                    className="imagePage"
+                    alt={shelter.name}
+                    style={{
+                      width: "280px",
+                      height: "150px",
+                      borderRadius: "10px",
+                    }}
+                  />
+                </div>
+                <div className="media-name">
+                  <Typography   className="paragraph1">
+                    <strong >{shelter.Location}</strong>
+                  </Typography>
+                  <Typography>{shelter.MediaType}</Typography>
+                </div>
+                <div className="price-tag" style={{ marginLeft: "80px" }}>
+                  <LocalOfferIcon className="price-icon" />
+                  <span className="price">{shelter.Price}</span>
+                </div>
+                <div>
+                  <Typography style={{ marginLeft: "99px" }}>
+                    {shelter.AreaSqFt} sq.ft
+                  </Typography>
+                </div>
+                
               </Link>
+              {/* <Button variant="contained" style={{ marginTop: "auto" }} onClick={addcart}>
+            ADD To Bag
+          </Button> */}
             </Paper>
+            
+          
           ))
         ) : (
           <div className="loading">
@@ -113,7 +139,7 @@ function PaginatedData() {
         )}
       </div>
       {loading && initialLoadComplete && <div>Loading more data...</div>}
-      {!loading && initialLoadComplete && hasMoreData && (
+      {!loading && initialLoadComplete && (
         <div className="buttonLoad">
           <button
             onClick={handleLoadMore}

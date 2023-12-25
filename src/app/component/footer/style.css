@@ -1,0 +1,81 @@
+/* Footer container */
+
+.footer {
+  background-color: black;
+  color: white;
+}
+
+.container {
+  background-color: black;
+  display: flex;
+
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-top: 5rem;
+}
+
+
+/* Social icons */
+.social-icons {
+  width: 350px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 15px;
+  color: #bababa;
+  margin-top: 2rem;
+}
+/* Middle section */
+.middle-section {
+  text-align: left;
+  transition: color 0.3s;
+  color: white;
+}
+.icon:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Right section */
+.right-section {
+  flex-shrink: 0;
+  color: white;
+  margin-right: 4rem;
+}
+.icon {
+  margin-top: 25px;
+}
+.lastline {
+  margin-top: 4rem;
+  width: 100%;
+  padding-left: 2rem;
+}
+.lastline ul {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.lastline ul li {
+  list-style: none;
+  color: white;
+  margin-right: 2rem;
+}
+.lastline ul li:hover {
+  color: #ff6702;
+  cursor: pointer;
+}
+.foot p {
+  text-align: center;
+  padding-top: 60px;
+  color: #bababa;
+}
+
+.foot {
+  /* background-color: black; */
+
+  height: 120px;
+  align-items: center;
+  justify-content: center;
+}

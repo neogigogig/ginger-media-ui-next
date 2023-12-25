@@ -2,20 +2,15 @@
 
 
 import "./style.css";
-import Box, { Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import {
   Paper,
   Typography,
   Grid,
-  Container,
-  useMediaQuery,
-  useTheme,
 } from "@mui/material";
 import Image from 'next/image';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import LightbulbIcon from "@mui/icons-material/Lightbulb";
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
-import Link from 'next/link';
 
 interface DetailsProps {
   params: {
@@ -23,19 +18,8 @@ interface DetailsProps {
   };
 }
 
-const Details: React.FC<DetailsProps> = async ({ params }) => {
-  var shelterId = params.id;
- 
-
-  console.log({ shelterId });
-  console.log(shelterId[1])
-  shelterId=shelterId[1];
-  const krPuramLatitude = 28.613;
-  const krPuramLongitude = 77.6876;
-  const krPuramAddress = 'Krishnarajapuram, Bangalore';
-
-
-
+const Details: React.FC<DetailsProps> = async ({ params }) => { 
+  const shelterId=params.id;
 
   const response = await fetch(
     `https://gjbq17jks3.execute-api.us-east-1.amazonaws.com/dev/getGmgById/${shelterId}`
@@ -47,7 +31,6 @@ const Details: React.FC<DetailsProps> = async ({ params }) => {
 
   return (
     <>
-      <Container className="hoarding">
         {data && (
           <>
             <div>
@@ -55,11 +38,10 @@ const Details: React.FC<DetailsProps> = async ({ params }) => {
                 Advertising on {data.MediaType} in {data.Location}
               </h1>
             </div>
-            <Paper>
               <Paper
                 style={{
                   marginTop:'2.2rem',
-                  backgroundColor: "#ff6702",
+                  backgroundColor: "#ea8542",
                   display: "flex",
                   alignItems: "center",
                   padding: "13px 10px 10px",
@@ -97,7 +79,7 @@ const Details: React.FC<DetailsProps> = async ({ params }) => {
                         />
                       </div>
                       <div>
-                        <p className="name1" style={{}}>
+                        <p className="name1">
                           {data.MediaType}
                         </p>
                         <p className="name_media" style={{marginTop:'20px'}}>MEDIATYPE</p>
@@ -144,16 +126,7 @@ const Details: React.FC<DetailsProps> = async ({ params }) => {
                     >
                       {data.MediaType} Ads in {data.Location}
                     </strong>
-
-                    <div
-                      className="paragraph"
-                      style={{
-                        fontFamily: 'Noto Sans',
-                        fontSize: '14px',
-                      }}
-                    >
                       {data.Description1}
-                    </div>
                   </Typography>
                 </div>
               </Paper>
@@ -168,22 +141,18 @@ const Details: React.FC<DetailsProps> = async ({ params }) => {
                 </Stack>
                 <Stack>
                   <ul className="orderkeyInsight">
-                    <h2 className="styleline"></h2>
                     <li>
                       Landmark <h6>{data.Location.slice(0, 10)}....</h6>
                     </li>
-                    <h2 className="styleline"></h2>
                     <li>
                       Id <h6>{data.Id.slice(-4)}</h6>
                     </li>
-                    <h2 className="styleline2"></h2>
                     <li className="qli">
                       Quantity <h6>{1}</h6>
                     </li>
                   </ul>
                 </Stack>
               </Stack>
-            </Paper>
 
             <Grid
               container
@@ -215,11 +184,13 @@ const Details: React.FC<DetailsProps> = async ({ params }) => {
                 <h3 style={{ marginLeft: '17px', marginRight: '17px', marginTop: '15px' }}>Top Choice</h3>
               </div>
               <div className="image" style={{ height: '150px', width: '250px', marginTop: '25px' }}>
-                <img
+                <Image
                   src={data.Image}
                   className="main_img"
                   alt="Bus with hoarding"
-                  style={{ width: "430px", height: "180px", borderRadius: "10px", marginLeft: '15px' }}
+                  width="430"
+                  height="180"
+                  style={{ borderRadius: "10px", marginLeft: '15px' }}
                 />
               </div>
               <div style={{ marginLeft: '17px', marginRight: '17px', marginTop: '55px' }}>
@@ -327,7 +298,6 @@ const Details: React.FC<DetailsProps> = async ({ params }) => {
             </Grid>
           </>
         )}
-      </Container>
     </>
   );
 };

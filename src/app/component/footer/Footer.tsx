@@ -10,42 +10,43 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
 
 import Image from "next/image";
+import { Box, Container } from "@mui/material";
 
-const Footer: React.FC = () => {
+const Footer = () => {
   return (
-    <div className="footer">
+    <Box className="footer">
+    <Container>
       <div className="container">
         <div className="left-section">
           <div className="left-img">
             <Image
               src={'/gmglogo.png'}
               alt="GMG Logo"
-              width={200}
-              height={130}
-              style={{ width: "100%", maxWidth: "350px" }}
+              width="200"
+              height="130"
             />
             <p className="title">
               A Pragmatic and innovative way to enthrall your 
-              <div>target group is just a click away!</div>
+              target group is just a click away!
             </p>
           </div>
           <div className="social-icons">
-            <IconButton style={{ color: "white", border: '1px solid white', borderRadius: '50%', margin: "0 1.5rem 0 0" }}>
+            <IconButton>
               <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
                 <LinkedInIcon style={{ color: "white", fontSize: 30 }} />
               </a>
             </IconButton>
-            <IconButton style={{ color: "white", border: '1px solid white', margin: "0 1.5rem 0 0" }}>
+            <IconButton>
               <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
                 <FacebookIcon style={{ color: "white", fontSize: 30 }} />
               </a>
             </IconButton>
-            <IconButton style={{ color: "white", border: '1px solid white', margin: "0 1.5rem 0 0" }}>
+            <IconButton>
               <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
                 <InstagramIcon style={{ color: "white", fontSize: 30 }} />
               </a>
             </IconButton>
-            <IconButton style={{ color: "white", border: '1px solid white', margin: "0 1.5rem 0 0" }}>
+            <IconButton>
               <a href="https://api.whatsapp.com/" target="_blank" rel="noopener noreferrer">
                 <WhatsAppIcon style={{ color: "white", fontSize: 30 }} />
               </a>
@@ -55,12 +56,12 @@ const Footer: React.FC = () => {
         <div className="middle-section">
           <span className="bold">Services</span>
           <div>
-            <p className="p1">ATL Marketing Activities</p>
-            <p className="p1">BTL Marketing</p>
-            <p className="p1">Transit Advertising</p>
-            <p className="p1">Residential Branding</p>
-            <p className="p1">Fabrication and Mounting</p>
-            <p className="p1">Digital Services</p>
+            <p>ATL Marketing Activities</p>
+            <p>BTL Marketing</p>
+            <p>Transit Advertising</p>
+            <p>Residential Branding</p>
+            <p>Fabrication and Mounting</p>
+            <p>Digital Services</p>
           </div>
         </div>
         <div className="right-section">
@@ -77,6 +78,7 @@ const Footer: React.FC = () => {
           </p>
         </div>
       </div>
+
       <div className="lastline">
         <ul>
           <li>Blog</li>
@@ -89,7 +91,8 @@ const Footer: React.FC = () => {
       <div className="foot">
         <p>&copy; Ginger Media Group 2023. All Rights Reserved.</p>
       </div>
-    </div>
+    </Container>
+    </Box>
   );
 };
 

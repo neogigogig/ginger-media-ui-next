@@ -1,15 +1,18 @@
-import FilterSearch from "./FilterSearch/page";
-import PaginatedData from "./PaginatedData/page";
+import FilterData from "./component/filteredData/FilterData";
+import FilterControl from "./component/filterControls/FilterControls";
 
-import FilterData from "./[Filter]/page";
+const Page = ({
+  params,
+  searchParams,
+}: {
+  params: { slug: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}) => {
 
-const Page: React.FC = () => {
   return (
     <section>
-      
-      <FilterData />
-
-      
+        <FilterControl />
+        <FilterData searchParams={searchParams}/>
     </section>
   );
 };

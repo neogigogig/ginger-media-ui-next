@@ -1,17 +1,20 @@
-'use client'
+import FilterData from "./component/filteredData/FilterData";
+import FilterControl from "./component/filterControls/FilterControls";
 
-import React, { useState } from 'react';
-import FilterSearch from './[FilterSearch]/page'
-import PaginatedData from './PaginatedData/page';
-
-import FilterData from './filter/page';
-const Page: React.FC = () => {
- 
+const Page = ({
+  params,
+  searchParams,
+}: {
+  params: { slug: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}) => {
 
   return (
-    <section>
-         
-         <FilterData/>
+    <section style={{alignItems:'center'}} className="lg:mx-auto mx-auto pl-5">
+   
+        <FilterControl />
+       
+        <FilterData searchParams={searchParams}/>
     </section>
   );
 };

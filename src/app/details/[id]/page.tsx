@@ -1,21 +1,16 @@
 
-'use client'
-import React, { useEffect, useState } from "react";
+
+
 import "./style.css";
-import Box, { Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import {
   Paper,
   Typography,
   Grid,
-  Container,
-  useMediaQuery,
-  useTheme,
 } from "@mui/material";
 import Image from 'next/image';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import LightbulbIcon from "@mui/icons-material/Lightbulb";
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
-import Link from 'next/link';
 
 interface DetailsProps {
   params: {
@@ -23,49 +18,19 @@ interface DetailsProps {
   };
 }
 
-const Details: React.FC<DetailsProps> = ({ params }) => {
-  var shelterId = params.id;
-  const [data, setData] = useState<any>(null);
+const Details: React.FC<DetailsProps> = async ({ params }) => { 
+  const shelterId=params.id;
 
-  console.log({ shelterId });
-  console.log(shelterId[1])
-  shelterId=shelterId[1];
-  const krPuramLatitude = 28.613;
-  const krPuramLongitude = 77.6876;
-  const krPuramAddress = 'Krishnarajapuram, Bangalore';
+  const response = await fetch(
+    `https://gjbq17jks3.execute-api.us-east-1.amazonaws.com/dev/getGmgById/${shelterId}`
+  );
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `https://gjbq17jks3.execute-api.us-east-1.amazonaws.com/dev/getGmgById/${shelterId}`
-        );
-        if (response.ok) {
-          console.log("connected");
-          const jsonData = await response.json();
-          setData(jsonData[0]);
-          console.log("Fetched data:", jsonData);
-        } else {
-          console.error("Failed to fetch data");
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+  const jsonData = await response.json();
+  const data = jsonData[0];
 
-    fetchData();
-  }, [shelterId]);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  });
-
-  const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <>
-      <Container className="hoarding">
         {data && (
           <>
             <div>
@@ -73,11 +38,10 @@ const Details: React.FC<DetailsProps> = ({ params }) => {
                 Advertising on {data.MediaType} in {data.Location}
               </h1>
             </div>
-            <Paper>
               <Paper
                 style={{
                   marginTop:'2.2rem',
-                  backgroundColor: "#ff6702",
+                  backgroundColor: "#ea8542",
                   display: "flex",
                   alignItems: "center",
                   padding: "13px 10px 10px",
@@ -87,7 +51,7 @@ const Details: React.FC<DetailsProps> = ({ params }) => {
                 
                   <Image
                     src={data.Image}
-                    width={1500}
+                    width={500}
                     height={380}
                     className="main_img"
                     alt="Bus with hoarding"
@@ -115,7 +79,7 @@ const Details: React.FC<DetailsProps> = ({ params }) => {
                         />
                       </div>
                       <div>
-                        <p className="name1" style={{}}>
+                        <p className="name1">
                           {data.MediaType}
                         </p>
                         <p className="name_media" style={{marginTop:'20px'}}>MEDIATYPE</p>
@@ -162,16 +126,7 @@ const Details: React.FC<DetailsProps> = ({ params }) => {
                     >
                       {data.MediaType} Ads in {data.Location}
                     </strong>
-
-                    <div
-                      className="paragraph"
-                      style={{
-                        fontFamily: 'Noto Sans',
-                        fontSize: '14px',
-                      }}
-                    >
                       {data.Description1}
-                    </div>
                   </Typography>
                 </div>
               </Paper>
@@ -186,22 +141,18 @@ const Details: React.FC<DetailsProps> = ({ params }) => {
                 </Stack>
                 <Stack>
                   <ul className="orderkeyInsight">
-                    <h2 className="styleline"></h2>
                     <li>
                       Landmark <h6>{data.Location.slice(0, 10)}....</h6>
                     </li>
-                    <h2 className="styleline"></h2>
                     <li>
                       Id <h6>{data.Id.slice(-4)}</h6>
                     </li>
-                    <h2 className="styleline2"></h2>
                     <li className="qli">
                       Quantity <h6>{1}</h6>
                     </li>
                   </ul>
                 </Stack>
               </Stack>
-            </Paper>
 
             <Grid
               container
@@ -210,11 +161,11 @@ const Details: React.FC<DetailsProps> = ({ params }) => {
               style={{ marginTop: "45px" }}
             >
               <Grid item xs={12} sm={10} md={8} lg={6}>
-                <Paper elevation={3} style={{ padding: theme.spacing(2) }}>
+                <Paper elevation={3} style={{ padding: '14px'}}>
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.5403924821444!2d77.68999402484195!3d13.001221987316892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae110edafdb9ab%3A0x3b68346de02a8f79!2sDiesel%20Loco%20Shed%2C%20S.W%20Railway!5e0!3m2!1sen!2sin!4v1699968680601!5m2!1sen!2sin"
                     width="100%"
-                    height={isSmallScreen ? '300px' : '450px'}
+                    height={450}
                     style={{ border: "0" }}
                     allowFullScreen={true}
                     loading="lazy"
@@ -227,17 +178,19 @@ const Details: React.FC<DetailsProps> = ({ params }) => {
             <Paper
               className="choice"
               elevation={3}
-              style={{ width: isSmallScreen ? "400px" : '400px', height: 'auto' }}
+              style={{ width: '400px', height: 'auto' }}
             >
               <div className="Top_choice">
                 <h3 style={{ marginLeft: '17px', marginRight: '17px', marginTop: '15px' }}>Top Choice</h3>
               </div>
               <div className="image" style={{ height: '150px', width: '250px', marginTop: '25px' }}>
-                <img
+                <Image
                   src={data.Image}
                   className="main_img"
                   alt="Bus with hoarding"
-                  style={{ width: "430px", height: "180px", borderRadius: "10px", marginLeft: '15px' }}
+                  width="430"
+                  height="180"
+                  style={{ borderRadius: "10px", marginLeft: '15px' }}
                 />
               </div>
               <div style={{ marginLeft: '17px', marginRight: '17px', marginTop: '55px' }}>
@@ -345,7 +298,6 @@ const Details: React.FC<DetailsProps> = ({ params }) => {
             </Grid>
           </>
         )}
-      </Container>
     </>
   );
 };

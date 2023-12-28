@@ -17,16 +17,11 @@ const Header = () => {
           }}
         >
           <Box sx={{ display: "flex", justifyContent: "flex-start" }}>
-            <Logo />
+            <Link href="/"><Logo /></Link>
           </Box>
           <Box>
             <ul style={{ gap: "4rem", margin: "24px", display: "flex" }}>
-              <li>
-                <Link href="/">Home</Link>
-              </li>
-              <li>
-                <Link href="/AboutUs">About Us</Link>
-              </li>
+             
             </ul>
             <Box />
           </Box>

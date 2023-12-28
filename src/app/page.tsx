@@ -10,8 +10,10 @@ const Page = ({
 }) => {
 
   return (
-    <section>
+    <section style={{alignItems:'center'}} className="lg:mx-auto mx-auto pl-5">
+   
         <FilterControl />
+       
         <FilterData searchParams={searchParams}/>
     </section>
   );

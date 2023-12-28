@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import { Box } from "@mui/material";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
-
+import './style.css';
 interface MediaCardProps {
   image: string;
   title: string;
@@ -31,7 +31,7 @@ export default function MediaCard({
   area,
 }: MediaCardProps) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 325,minWidth:325}}>
       <CardMedia sx={{ height: 140 }} image={image} title={title} />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
@@ -42,12 +42,12 @@ export default function MediaCard({
         </Typography>
         <Box>
           <LocalOfferIcon />
-          <span>{price}</span>
+          <span >{price}</span>
         </Box>
         <Typography style={{ marginLeft: "19px" }}>{area} sq.ft</Typography>
       </CardContent>
       <CardActions>
-        <Link href={detailsUrl}>Learn More</Link>
+        <Link href={detailsUrl} style={{backgroundColor:'blue',color:'white',padding:'5px 5px'}} className="learnMoreButton">Learn More</Link>
       </CardActions>
     </Card>
   );

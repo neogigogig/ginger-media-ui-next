@@ -51,7 +51,7 @@ const Details: React.FC<DetailsProps> = async ({ params }) => {
                 
                   <Image
                     src={data.Image}
-                    width={1500}
+                    width={500}
                     height={380}
                     className="main_img"
                     alt="Bus with hoarding"

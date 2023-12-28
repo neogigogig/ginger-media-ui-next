@@ -64,8 +64,9 @@ const filterParameters: FilterParameter[] = [
 
 const FilterControls = () => {
     return (
-        <div>
+        <div style={{marginTop:'20px'}} className="lg:mx-auto mx-auto pl-{10}">
             {filterParameters.map(parameter => <FilterMultiSelect key={parameter.id} filterParameter={parameter}/>)}
+            {}
         </div>
     )
 }

@@ -6,6 +6,7 @@ interface FormValue {
 }
 
 export async function getFilterGmgData(formvalue: FormValue) {
+  
   return fetch(`${BaseUrl}/getAllFilterGmg`, {
     method: 'POST',
     headers: {

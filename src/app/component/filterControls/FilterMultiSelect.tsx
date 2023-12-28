@@ -1,14 +1,13 @@
-"use client";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import {
-  Checkbox,
-  FormControl,
-  InputLabel,
-  ListItemText,
-  MenuItem,
-  OutlinedInput,
-  Select,
-  SelectChangeEvent,
+ Checkbox,
+ FormControl,
+ InputLabel,
+ ListItemText,
+ MenuItem,
+ OutlinedInput,
+ Select,
+ SelectChangeEvent,
 } from "@mui/material";
 import { FilterParameter } from "./types";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -16,26 +15,34 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
-  PaperProps: {
+ PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
       width: 250,
     },
-  },
+ },
 };
 
 interface FilterMultiSelectProps {
-  filterParameter: FilterParameter;
+ filterParameter: FilterParameter;
 }
 
 export default function FilterMultiSelect({
-  filterParameter,
+ filterParameter,
 }: FilterMultiSelectProps) {
-  const [selectedFilters, setSelectedFilters] = React.useState<string[]>([]);
-  const router = useRouter();
-  const pathname = usePathname();
+ const [selectedFilters, setSelectedFilters] = React.useState<string[]>([]);
+ const router = useRouter();
+ const pathname = usePathname();
+ const searchParams = useSearchParams()!;
 
-  const handleChange = (event: SelectChangeEvent<typeof selectedFilters>) => {
+ useEffect(() => {
+    const filtersFromUrl = searchParams.get(filterParameter.id);
+    if (filtersFromUrl) {
+      setSelectedFilters(filtersFromUrl.split(","));
+    }
+ }, [searchParams, filterParameter.id]);
+
+ const handleChange = (event: SelectChangeEvent<typeof selectedFilters>) => {
     const {
       target: { value },
     } = event;
@@ -47,12 +54,9 @@ export default function FilterMultiSelect({
     const queryStr = createQueryString(filterParameter.id, valueString);
     router.push(pathname + '?' + queryStr)
 
-  };
+ };
 
-  const searchParams = useSearchParams()!;
-  // Get a new searchParams string by merging the current
-  // searchParams with a provided key/value pair
-  const createQueryString = useCallback(
+ const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams);
       params.set(name, value);
@@ -60,9 +64,9 @@ export default function FilterMultiSelect({
       return params.toString();
     },
     [searchParams]
-  );
+ );
 
-  return (
+ return (
     <FormControl sx={{ m: 1, width: 300 }}>
       <InputLabel>{filterParameter.label}</InputLabel>
       <Select
@@ -81,5 +85,5 @@ export default function FilterMultiSelect({
         ))}
       </Select>
     </FormControl>
-  );
+ );
 }

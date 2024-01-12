@@ -4,7 +4,6 @@ import IconButton from "@mui/material/IconButton";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import RoomIcon from "@mui/icons-material/Room";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
@@ -44,11 +43,6 @@ const Footer = () => {
             <IconButton>
               <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
                 <InstagramIcon style={{ color: "white", fontSize: 30 }} />
-              </a>
-            </IconButton>
-            <IconButton>
-              <a href="https://api.whatsapp.com/" target="_blank" rel="noopener noreferrer">
-                <WhatsAppIcon style={{ color: "white", fontSize: 30 }} />
               </a>
             </IconButton>
           </div>

@@ -4,9 +4,6 @@ import IconButton from "@mui/material/IconButton";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import RoomIcon from "@mui/icons-material/Room";
-import PhoneIcon from "@mui/icons-material/Phone";
-import EmailIcon from "@mui/icons-material/Email";
 
 import Image from "next/image";
 import { Box, Container } from "@mui/material";
@@ -57,19 +54,6 @@ const Footer = () => {
             <p>Fabrication and Mounting</p>
             <p>Digital Services</p>
           </div>
-        </div>
-        <div className="right-section">
-          <span className="bold bold2">Get in Touch</span>
-          <p className="icon"><RoomIcon style={{ color: "#ff6702" }} />{" "}
-            Rukmini Knowledge Park, Kattigenahalli,
-            {/* Add your address details */}
-          </p>
-          <p className="icon"> <PhoneIcon style={{ color: "#ff6702" }} />{" "}
-            +91-9999999999
-          </p>
-          <p className="icon"><EmailIcon style={{ color: "#ff6702" }} />{" "}
-            contact@gingermediagroup.com
-          </p>
         </div>
       </div>
 

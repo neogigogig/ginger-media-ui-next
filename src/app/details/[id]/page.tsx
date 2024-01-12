@@ -9,8 +9,7 @@ import {
   Grid,
 } from "@mui/material";
 import Image from 'next/image';
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
+import {RemoveRedEye, ShoppingBasket} from '@mui/icons-material';
 
 interface DetailsProps {
   params: {
@@ -205,8 +204,8 @@ const Details: React.FC<DetailsProps> = async ({ params }) => {
                 <div > &#8377; 1,0,0,000 Per Day</div>
               </div>
               <div className='button'  >
-                <div className="button2"><RemoveRedEyeIcon /><p style={{ paddingLeft: '5px' }}>Eecution Details </p></div>
-                <div className="button2"><ShoppingBasketIcon /><p style={{ paddingLeft: '5px' }}>Customize & Quote</p></div>
+                <div className="button2"><RemoveRedEye /><p style={{ paddingLeft: '5px' }}>Eecution Details </p></div>
+                <div className="button2"><ShoppingBasket /><p style={{ paddingLeft: '5px' }}>Customize & Quote</p></div>
               </div>
             </Paper>
 

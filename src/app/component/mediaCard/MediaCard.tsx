@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import { Box } from "@mui/material";
-import LocalOfferIcon from "@mui/icons-material/LocalOffer";
+import { LocalOffer } from "@mui/icons-material";
 import './style.css';
 interface MediaCardProps {
   image: string;
@@ -41,7 +41,7 @@ export default function MediaCard({
           {mediaType} , {city}
         </Typography>
         <Box>
-          <LocalOfferIcon />
+          <LocalOffer />
           <span >{price}</span>
         </Box>
         <Typography style={{ marginLeft: "19px" }}>{area} sq.ft</Typography>

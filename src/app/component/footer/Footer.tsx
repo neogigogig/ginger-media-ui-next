@@ -1,9 +1,8 @@
 import React from "react";
 import "./style.css";
 import IconButton from "@mui/material/IconButton";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import FacebookIcon from "@mui/icons-material/Facebook";
+import {LinkedIn,Instagram, Facebook, WhatsApp, Room, Phone, Email  } from "@mui/icons-material";
+
 
 import Image from "next/image";
 import { Box, Container } from "@mui/material";
@@ -29,17 +28,22 @@ const Footer = () => {
           <div className="social-icons">
             <IconButton>
               <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
-                <LinkedInIcon style={{ color: "white", fontSize: 30 }} />
+                <LinkedIn style={{ color: "white", fontSize: 30 }} />
               </a>
             </IconButton>
             <IconButton>
               <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
-                <FacebookIcon style={{ color: "white", fontSize: 30 }} />
+                <Facebook style={{ color: "white", fontSize: 30 }} />
               </a>
             </IconButton>
             <IconButton>
               <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
-                <InstagramIcon style={{ color: "white", fontSize: 30 }} />
+                <Instagram style={{ color: "white", fontSize: 30 }} />
+              </a>
+            </IconButton>
+            <IconButton>
+              <a href="https://api.whatsapp.com/" target="_blank" rel="noopener noreferrer">
+                <WhatsApp style={{ color: "white", fontSize: 30 }} />
               </a>
             </IconButton>
           </div>
@@ -54,6 +58,19 @@ const Footer = () => {
             <p>Fabrication and Mounting</p>
             <p>Digital Services</p>
           </div>
+        </div>
+        <div className="right-section">
+          <span className="bold bold2">Get in Touch</span>
+          <p className="icon"><Room style={{ color: "#ff6702" }} />{" "}
+            Rukmini Knowledge Park, Kattigenahalli,
+            {/* Add your address details */}
+          </p>
+          <p className="icon"> <Phone style={{ color: "#ff6702" }} />{" "}
+            +91-9999999999
+          </p>
+          <p className="icon"><Email style={{ color: "#ff6702" }} />{" "}
+            contact@gingermediagroup.com
+          </p>
         </div>
       </div>
 

@@ -86,7 +86,7 @@ const ServicePage = async ({
                   </CardContent>
                   <CardActions>
                     <Link
-                      href={`/${service}/${media.id}`}
+                      href={`/${service}/${media.mediaType}-${media.city}/${media.id}`}
                       style={{
                         color: "blue",
                         padding: "5px 5px",

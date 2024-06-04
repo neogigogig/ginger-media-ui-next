@@ -1,64 +1,58 @@
-import { getMediaDetailsByService } from "../../clients/getMediaDetailsByService";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import {
   Typography,
   Box,
-  Card,
-  CardContent,
+  Button,
   Grid,
-  CardMedia,
+  Card,
   CardActions,
+  CardContent,
+  Link,
+  CardMedia,
 } from "@mui/material";
-import Link from "next/link";
-import { serviceAndMediaType } from "@/component/mappers/service&MediaType";
-import FilterComponent, {
-  FilterData,
-} from "@/component/ServicePageComponents/FilterComponent";
-import { getFilters } from "@/clients/getFilters";
 import { getMediaDetailsByServiceAndFilter } from "@/clients/getMediaDetailsByService&Filter";
-import ParamsDisplayComponent from "@/component/ServicePageComponents/Paginartion";
+import { serviceAndMediaType } from "../mappers/service&MediaType";
 
-interface ServicePageProps {
-  params: { service: string };
+interface ParamsDisplayComponentProps {
+  params: { [key: string]: any };
   searchParams: { [key: string]: string | string[] | undefined };
 }
 
-const ServicePage = async ({ params, searchParams }: ServicePageProps) => {
+const ParamsDisplayComponent: React.FC<ParamsDisplayComponentProps> = ({
+  params,
+  searchParams,
+}) => {
+  const [page, setPage] = useState(2);
   const service = params.service;
-  const filters: FilterData = await getFilters(service);
+  const [mediaDetails, setMediaDetails] = useState<any[]>([]);
 
-  const isFiltersApplied = Object.keys(searchParams).length > 0;
+  useEffect(() => {
+    setPage(2);
+    setMediaDetails([]);
+  }, [params, searchParams]);
 
-  const mediaDetails = await (async () => {
+  const handleLoadMore = async () => {
     try {
-      if (isFiltersApplied) {
-        const response: any = await getMediaDetailsByServiceAndFilter(
-          service,
-          searchParams
-        );
-        const mediaList = response.data;
-        if (!mediaList || mediaList.length === 0) {
-          return null;
-        } else {
-          return response.data;
-        }
-      } else {
-        const response: any = await getMediaDetailsByService(service);
-        const mediaList = response.data;
-        if (!mediaList || mediaList.length === 0) {
-          return null;
-        } else {
-          return response.data;
-        }
-      }
-    } catch (error) {
-      console.error("Failed to fetch media details", error);
-      return null;
+      const response: any = await getMediaDetailsByServiceAndFilter(
+        service,
+        searchParams,
+        page
+      );
+      const mediaList = response.data;
+      setMediaDetails((prevMediaDetails) => [
+        ...prevMediaDetails,
+        ...mediaList,
+      ]);
+      setPage((prevPage) => prevPage + 1);
+    } catch (e) {
+      console.error(e);
     }
-  })();
+  };
 
   return (
     <Box>
-      <FilterComponent params={params} initialFilters={filters} />
       {mediaDetails ? (
         <Box>
           <Grid container spacing={2}>
@@ -97,18 +91,37 @@ const ServicePage = async ({ params, searchParams }: ServicePageProps) => {
               </Grid>
             ))}
           </Grid>
-          <Box sx={{marginTop: "15px"}}>
-            <ParamsDisplayComponent
-              params={params}
-              searchParams={searchParams}
-            />
-          </Box>
+          <Button
+            variant="contained"
+            onClick={handleLoadMore}
+            style={{
+              color: "white",
+              backgroundColor: "blue",
+              padding: "5px 5px",
+              textDecoration: "none",
+              margin: "10px",
+            }}
+          >
+            Load More ...
+          </Button>
         </Box>
       ) : (
-        <Typography variant="body1">No details available</Typography>
+        <Button
+          variant="contained"
+          onClick={handleLoadMore}
+          style={{
+            color: "white",
+            backgroundColor: "blue",
+            padding: "5px 5px",
+            textDecoration: "none",
+            margin: "10px",
+          }}
+        >
+          Load More ...
+        </Button>
       )}
     </Box>
   );
 };
 
-export default ServicePage;
+export default ParamsDisplayComponent;

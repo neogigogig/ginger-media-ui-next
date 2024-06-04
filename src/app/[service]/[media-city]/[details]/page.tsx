@@ -1,7 +1,6 @@
-import { Typography, Box, Paper, Stack, Grid } from "@mui/material";
+import { Typography, Box, Paper, Grid } from "@mui/material";
 import { getMediaDataById } from "@/clients/getMediaDataById";
 import Image from "next/image";
-import "./style.css";
 import { description } from "@/component/detailsPage/detailsPageDescription";
 
 interface DetailsPageProps {
@@ -30,17 +29,12 @@ const DetailsPage = async ({ params }: DetailsPageProps) => {
       {mediaDetails ? (
         <>
           <div>
-            <h1 className="heading_main">
+            <Typography variant="h5">
               Advertising on {mediaDetails.mediaType} in {mediaDetails.location}
-            </h1>
+            </Typography>
           </div>
           <Paper>
-            <Image
-              src={mediaDetails.imageUrl}
-              className="main_img"
-              alt="Bus with hoarding"
-              style={{ borderRadius: "10px" }}
-            />
+            <Image src={mediaDetails.imageUrl} alt={mediaDetails.mediaType}/>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={7}>
                 <Typography>
@@ -72,13 +66,12 @@ const DetailsPage = async ({ params }: DetailsPageProps) => {
             <Grid item xs={12} sm={10} md={8} lg={6}>
               <Paper elevation={3}>
                 <iframe
-                  src="https://maps.google.com/maps?q=13.0172352309,77.6600646891&z=15&output=embed"
+                  src={`https://maps.google.com/maps?q=${mediaDetails.latitude},${mediaDetails.longitude}&z=15&output=embed`}
                   width={200}
                   height={200}
-                  style={{ border: "0" }}
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                ></iframe>
+                />
               </Paper>
             </Grid>
           </Grid>

@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import {
   Typography,
   Box,
-  Button,
   Grid,
   Card,
   CardActions,
@@ -91,34 +90,34 @@ const ParamsDisplayComponent: React.FC<ParamsDisplayComponentProps> = ({
               </Grid>
             ))}
           </Grid>
-          <Button
-            variant="contained"
+          <button
             onClick={handleLoadMore}
             style={{
               color: "white",
-              backgroundColor: "blue",
-              padding: "5px 5px",
-              textDecoration: "none",
-              margin: "10px",
+              backgroundColor: "#ff6702",
+              padding: "10px",
+              margin: "12px",
+              fontWeight: "600",
+              borderRadius: "5px",
             }}
           >
             Load More ...
-          </Button>
+          </button>
         </Box>
       ) : (
-        <Button
-          variant="contained"
+        <button
           onClick={handleLoadMore}
           style={{
             color: "white",
-            backgroundColor: "blue",
-            padding: "5px 5px",
-            textDecoration: "none",
-            margin: "10px",
+            backgroundColor: "#ff6702",
+            padding: "10px",
+            margin: "12px",
+            fontWeight: "600",
+            borderRadius: "5px",
           }}
         >
           Load More ...
-        </Button>
+        </button>
       )}
     </Box>
   );

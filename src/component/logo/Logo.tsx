@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 
 const Logo = () => {
   return (
-      <Box> <Image alt="Logo" src={'/gmglogo.png'} width="200" height="500" /> </Box>
+      <Box> <Image alt="Logo" src={'/gmglogo.png'} width="170" height="63" /> </Box>
   );
 };
 

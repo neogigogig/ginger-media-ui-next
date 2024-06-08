@@ -124,11 +124,14 @@ const FilterComponent: React.FC<FilterComponentProps> = ({
             }
           >
             {filters[category].map((value) => (
-              <MenuItem key={value} value={value}>
+              <MenuItem
+                key={value}
+                value={value}
+                onClick={() => handleFilterChange(category, value)}
+              >
                 <Checkbox
                   size="small"
                   checked={selectedFilters[category]?.includes(value) || false}
-                  onChange={() => handleFilterChange(category, value)}
                 />
                 <ListItemText primary={filterOptions[category][value]} />
               </MenuItem>

@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Header />
-        <Container maxWidth="lg"> {children}</Container>
+        <Container maxWidth="lg" sx={{minHeight: "500px"}}> {children}</Container>
         <Footer />
       </body>
     </html>

@@ -1,13 +1,11 @@
 import React from "react";
-import Image from "next/image";
-
 import Link from "next/link";
 import { Box, Container } from "@mui/material";
 import Logo from "../logo/Logo";
 
 const Header = () => {
   return (
-    <Box sx={{ backgroundColor: "#F5F7FA" }}>
+    <Box sx={{ backgroundColor: "#F5F7FA", padding: "10px 0" }}>
       <Container>
         <Box
           sx={{
@@ -17,12 +15,22 @@ const Header = () => {
           }}
         >
           <Box sx={{ display: "flex", justifyContent: "flex-start" }}>
-            <Link href="/"><Logo /></Link>
+            <Link href="/">
+              <Logo />
+            </Link>
           </Box>
           <Box>
-            <ul style={{ gap: "4rem", margin: "24px", display: "flex" }}>
-             
-            </ul>
+            <button
+              style={{
+                backgroundColor: "#ff6702",
+                color: "white",
+                padding: "10px 20px",
+                fontWeight: "600",
+                borderRadius: "5px",
+              }}
+            >
+              Contact Us
+            </button>
             <Box />
           </Box>
         </Box>

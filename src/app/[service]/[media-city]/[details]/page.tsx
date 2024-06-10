@@ -1,7 +1,9 @@
-import { Typography, Box, Paper, Grid } from "@mui/material";
+import { Typography, Box, Paper, Grid, Link, Breadcrumbs } from "@mui/material";
 import { getMediaDataById } from "@/clients/getMediaDataById";
 import Image from "next/image";
 import { description } from "@/component/detailsPage/detailsPageDescription";
+import { serviceAndMediaType } from "@/component/mappers/service&MediaType";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 interface DetailsPageProps {
   params: {
@@ -24,17 +26,58 @@ const DetailsPage = async ({ params }: DetailsPageProps) => {
     }
   })();
 
+  if (!mediaDetails) {
+    return (
+      <Box>
+        <Breadcrumbs
+          separator={<NavigateNextIcon fontSize="small" />}
+          aria-label="breadcrumb"
+        >
+          <Link underline="hover" key="1" color="inherit" href="/">
+            Home
+          </Link>
+          <Link underline="hover" key="2" color="inherit" href={`/${service}`}>
+            {serviceAndMediaType[service]}
+          </Link>
+          <Typography key="3" color="text.primary">
+            No details available
+          </Typography>
+        </Breadcrumbs>
+        <Typography variant="body1">No details available</Typography>
+      </Box>
+    );
+  }
+
+  const breadcrumbs = [
+    <Link underline="hover" key="1" color="inherit" href="/">
+      Home
+    </Link>,
+    <Link underline="hover" key="2" color="inherit" href={`/${service}`}>
+      {serviceAndMediaType[service]}
+    </Link>,
+    <Typography key="3" color="text.primary">
+      {serviceAndMediaType[mediaDetails.mediaType]} - {mediaDetails.location}
+    </Typography>,
+  ];
+
   return (
     <Box>
+      <Breadcrumbs
+        separator={<NavigateNextIcon fontSize="small" />}
+        aria-label="breadcrumb"
+      >
+        {breadcrumbs}
+      </Breadcrumbs>
       {mediaDetails ? (
         <>
           <div>
             <Typography variant="h5">
-              Advertising on {mediaDetails.mediaType} in {mediaDetails.location}
+              Advertising on {serviceAndMediaType[mediaDetails.mediaType]} in
+              {mediaDetails.location}
             </Typography>
           </div>
           <Paper>
-            <Image src={mediaDetails.imageUrl} alt={mediaDetails.mediaType}/>
+            <Image src={mediaDetails.imageUrl} alt={mediaDetails.mediaType} />
             <Grid container spacing={2}>
               <Grid item xs={12} sm={7}>
                 <Typography>

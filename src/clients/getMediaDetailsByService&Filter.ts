@@ -5,7 +5,7 @@ export async function getMediaDetailsByServiceAndFilter(service: string, searchP
 
     const url = page
     ? `${BaseUrl}/getMediaDetailsByService?service=${service}${queryString ? '&' + queryString : ''}&page=${page}`
-    : `${BaseUrl}/getMediaDetailsByService?service=${service}${queryString ? '&' + queryString : ''}`;
+    : `${BaseUrl}/getMediaDetailsByService?service=${service}${queryString ? '&' + queryString : ''}&pageSize=18`;
 
     const response = await fetch(url, {
         method: 'GET',

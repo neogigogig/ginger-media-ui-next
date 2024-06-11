@@ -4,6 +4,7 @@ import Image from "next/image";
 import { description } from "@/component/detailsPage/detailsPageDescription";
 import { serviceAndMediaType } from "@/component/mappers/service&MediaType";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import { filterOptions } from "@/component/mappers/filter";
 
 interface DetailsPageProps {
   params: {
@@ -72,8 +73,7 @@ const DetailsPage = async ({ params }: DetailsPageProps) => {
         <>
           <div>
             <Typography variant="h5">
-              Advertising on {serviceAndMediaType[mediaDetails.mediaType]} in
-              {mediaDetails.location}
+              Advertising on {serviceAndMediaType[mediaDetails.mediaType]} in {mediaDetails.location} - {mediaId}
             </Typography>
           </div>
           <Paper>
@@ -91,7 +91,7 @@ const DetailsPage = async ({ params }: DetailsPageProps) => {
               </Grid>
               <Grid item xs={12} sm={5}>
                 <Typography variant="h6">Key Insight</Typography>
-                <Typography>Media Type: {mediaDetails.mediaType}</Typography>
+                <Typography>Media Type: {serviceAndMediaType[mediaDetails.mediaType]}</Typography>
                 <Typography>City: {mediaDetails.city}</Typography>
                 <Typography>
                   Location: {mediaDetails.location} near {mediaDetails.landmark}
@@ -100,7 +100,7 @@ const DetailsPage = async ({ params }: DetailsPageProps) => {
                   Towards: {JSON.parse(mediaDetails.additionalDetails).towards}
                 </Typography>
                 <Typography>Media Id: {mediaId}</Typography>
-                <Typography>Illumination: {mediaDetails.lighting}</Typography>
+                <Typography>Illumination: {filterOptions["lighting"][mediaDetails.lighting]}</Typography>
                 <Typography>Area: {mediaDetails.areaInSqFeet} sq.ft</Typography>
               </Grid>
             </Grid>

@@ -10,7 +10,7 @@ import {
   Link,
   Breadcrumbs,
 } from "@mui/material";
-import { serviceAndMediaType } from "@/component/mappers/service&MediaType";
+import { serviceAndMediaType, urlMapperServiceAndMediaType } from "@/component/mappers/service&MediaType";
 import FilterComponent, {
   FilterData,
 } from "@/component/ServicePageComponents/FilterComponent";
@@ -28,6 +28,10 @@ const ServicePage = async ({ params, searchParams }: ServicePageProps) => {
   const service = params.service;
   const filters: FilterData = await getFilters(service);
 
+  const formatStringToUrl = (input: string): string => {
+    return input.toLowerCase().replace(/\s+/g, '-');
+  };
+
   const breadcrumbs = [
     <Link underline="hover" key="1" color="inherit" href="/">
       Home
@@ -44,7 +48,7 @@ const ServicePage = async ({ params, searchParams }: ServicePageProps) => {
       if (isFiltersApplied) {
         const response: any = await getMediaDetailsByServiceAndFilter(
           service,
-          searchParams
+          searchParams,
         );
         const mediaList = response.data;
         if (!mediaList || mediaList.length === 0) {
@@ -53,7 +57,7 @@ const ServicePage = async ({ params, searchParams }: ServicePageProps) => {
           return response.data;
         }
       } else {
-        const response: any = await getMediaDetailsByService(service);
+        const response: any = await getMediaDetailsByService(service, 18);
         const mediaList = response.data;
         if (!mediaList || mediaList.length === 0) {
           return null;
@@ -85,8 +89,8 @@ const ServicePage = async ({ params, searchParams }: ServicePageProps) => {
                   <CardMedia image={media.imageUrl} />
                   <CardContent>
                     <Typography gutterBottom variant="h6" component="div">
-                      {serviceAndMediaType[media.mediaType] || media.mediaType}-{" "}
-                      {media.landmark}
+                      {serviceAndMediaType[media.mediaType] || media.mediaType}-
+                      {media.location}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                       {media.city}
@@ -100,7 +104,7 @@ const ServicePage = async ({ params, searchParams }: ServicePageProps) => {
                   </CardContent>
                   <CardActions>
                     <Link
-                      href={`/${service}/${media.mediaType}-${media.city}/${media.id}`}
+                      href={`/${service}/${urlMapperServiceAndMediaType[media.mediaType]}-${formatStringToUrl(media.location)}-${formatStringToUrl(media.city)}/${media.id}`}
                       style={{
                         color: "blue",
                         padding: "5px 5px",

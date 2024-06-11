@@ -7,8 +7,9 @@ import {
   Grid,
   CardMedia,
   CardActions,
+  Link,
+  Breadcrumbs,
 } from "@mui/material";
-import Link from "next/link";
 import { serviceAndMediaType } from "@/component/mappers/service&MediaType";
 import FilterComponent, {
   FilterData,
@@ -16,6 +17,7 @@ import FilterComponent, {
 import { getFilters } from "@/clients/getFilters";
 import { getMediaDetailsByServiceAndFilter } from "@/clients/getMediaDetailsByService&Filter";
 import ParamsDisplayComponent from "@/component/ServicePageComponents/Paginartion";
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 interface ServicePageProps {
   params: { service: string };
@@ -25,6 +27,15 @@ interface ServicePageProps {
 const ServicePage = async ({ params, searchParams }: ServicePageProps) => {
   const service = params.service;
   const filters: FilterData = await getFilters(service);
+
+  const breadcrumbs = [
+    <Link underline="hover" key="1" color="inherit" href="/">
+      Home
+    </Link>,
+    <Typography key="3" color="text.primary">
+      {serviceAndMediaType[service]}
+    </Typography>,
+  ];
 
   const isFiltersApplied = Object.keys(searchParams).length > 0;
 
@@ -58,6 +69,12 @@ const ServicePage = async ({ params, searchParams }: ServicePageProps) => {
 
   return (
     <Box>
+      <Breadcrumbs
+        separator={<NavigateNextIcon fontSize="small" />}
+        aria-label="breadcrumb"
+      >
+        {breadcrumbs}
+      </Breadcrumbs>
       <FilterComponent params={params} initialFilters={filters} />
       {mediaDetails ? (
         <Box>

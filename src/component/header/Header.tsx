@@ -20,17 +20,23 @@ const Header = () => {
             </Link>
           </Box>
           <Box>
-            <button
+            <Link
+              href="https://gingermediagroup.com/contact"
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
+                display: "inline-block",
                 backgroundColor: "#ff6702",
                 color: "white",
                 padding: "10px 20px",
                 fontWeight: "600",
                 borderRadius: "5px",
+                textDecoration: "none",
+                textAlign: "center",
               }}
             >
               Contact Us
-            </button>
+            </Link>
             <Box />
           </Box>
         </Box>

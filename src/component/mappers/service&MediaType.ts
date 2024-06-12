@@ -7,3 +7,13 @@ export const serviceAndMediaType: { [key: string]: string } = {
     "skyWalk": "Sky Walk",
     "unipole": "Unipole"
   };
+
+  export const urlMapperServiceAndMediaType: { [key: string]: string } = {
+    "outdoor": "outdoor",
+    "hoarding": "hoarding",
+    "busShelter": "bus-shelter",
+    "poleKiosk": "pole-kiosk",
+    "gantry": "gantry",
+    "skyWalk": "sky-walk",
+    "unipole": "unipole"
+  };

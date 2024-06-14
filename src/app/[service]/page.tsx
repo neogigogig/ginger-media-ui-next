@@ -18,10 +18,23 @@ import { getFilters } from "@/clients/getFilters";
 import { getMediaDetailsByServiceAndFilter } from "@/clients/getMediaDetailsByService&Filter";
 import ParamsDisplayComponent from "@/component/ServicePageComponents/Paginartion";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { Metadata } from "next/types";
 
 interface ServicePageProps {
   params: { service: string };
   searchParams: { [key: string]: string | string[] | undefined };
+}
+
+export async function generateMetadata({
+  params,
+}: ServicePageProps): Promise<Metadata> { 
+  const service = params.service;
+  const title = serviceAndMediaType[service];
+
+  return {
+    title: `${title} Advertising | Ginger Media Group`,
+    description: "",
+  };
 }
 
 const ServicePage = async ({ params, searchParams }: ServicePageProps) => {

@@ -4,7 +4,7 @@ export const filterOptions: { [key in FilterCategory]: { [key: string]: string }
   cities: {
     mumbai: "Mumbai",
     delhi: "Delhi",
-    bangalore: "Bangalore",
+    bengaluru: "Bengaluru",
   },
   mediaTypes: {
     hoarding: "Hoarding",

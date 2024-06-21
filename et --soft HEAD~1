@@ -1,0 +1,182 @@
+[33mcommit d0a206b3bf920cb797a226323bce2da401ea7d4b[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: Vishwas-1411 <vishwas.vankalapati@gogig.in>
+Date:   Fri Jun 21 10:19:58 2024 +0530
+
+    Details page basic design
+
+[33mcommit 896db888f7459e49315374998e889d21ad7e09fc[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: d7d108a 68e2671
+Author: Vishwas Vankalaphati <141409979+Vishwas-1411@users.noreply.github.com>
+Date:   Wed Jun 12 13:20:39 2024 +0530
+
+    Merge pull request #8 from neogigogig/URLReformat
+    
+    Changed details page URL
+
+[33mcommit 68e267128220a11dc3cbd265d56f78c0aadf411d[m[33m ([m[1;31morigin/URLReformat[m[33m)[m
+Author: Vishwas-1411 <vishwas.vankalapati@gogig.in>
+Date:   Tue Jun 11 18:44:17 2024 +0530
+
+    Changed details page URL
+
+[33mcommit d7d108a8c9097657e3bfdd432fd260bd1c40c45e[m
+Merge: 9d0a10a d1407d3
+Author: Vishwas Vankalaphati <141409979+Vishwas-1411@users.noreply.github.com>
+Date:   Tue Jun 11 11:04:13 2024 +0530
+
+    Merge pull request #7 from neogigogig/Breadcrumbs
+    
+    Added breadcrumbs to the services and details page
+
+[33mcommit d1407d326af38482160137f22de9f742d6d254ca[m[33m ([m[1;31morigin/Breadcrumbs[m[33m)[m
+Author: Vishwas-1411 <vishwas.vankalapati@gogig.in>
+Date:   Mon Jun 10 11:12:02 2024 +0530
+
+    Added breadcrumbs to the services and details page
+
+[33mcommit 9d0a10a10e39ba4a8714291222f5966d0e357b7b[m[33m ([m[1;32mBreadcrumbs[m[33m)[m
+Merge: 8396198 53c1ad9
+Author: Vishwas Vankalaphati <141409979+Vishwas-1411@users.noreply.github.com>
+Date:   Sat Jun 8 11:48:28 2024 +0530
+
+    Merge pull request #6 from neogigogig/Header
+    
+    Added header and fixing the filter UI
+
+[33mcommit 53c1ad97f167d3d3405943c04ef39d514d8af4be[m[33m ([m[1;31morigin/Header[m[33m)[m
+Author: Vishwas-1411 <vishwas.vankalapati@gogig.in>
+Date:   Sat Jun 8 10:30:12 2024 +0530
+
+    Added header and fixing the filter UI
+
+[33mcommit 83961986d1d5a6b61f498394881e63c6f1ec6926[m
+Merge: 6289885 ca6128f
+Author: Vishwas Vankalaphati <141409979+Vishwas-1411@users.noreply.github.com>
+Date:   Thu Jun 6 11:41:50 2024 +0530
+
+    Merge pull request #5 from neogigogig/Pagination
+    
+    Added pagination (load more) in service page
+
+[33mcommit ca6128fccca7307973766d0c42c9fcf0e7d911a6[m[33m ([m[1;31morigin/Pagination[m[33m, [m[1;32mPagination[m[33m)[m
+Author: Vishwas-1411 <vishwas.vankalapati@gogig.in>
+Date:   Tue Jun 4 16:17:35 2024 +0530
+
+    Added pagination (load more) in service page
+
+[33mcommit 628988533e91399d0ea20a7319a9ccee98394b37[m
+Merge: 2190d32 eea4f7c
+Author: Vishwas Vankalaphati <141409979+Vishwas-1411@users.noreply.github.com>
+Date:   Mon Jun 3 17:37:42 2024 +0530
+
+    Merge pull request #4 from neogigogig/UrlFormat
+    
+    Changed the URL format and added more details in it
+
+[33mcommit eea4f7c3b0f0d99b4ac3b98fcc2312ec3dc9f4b3[m[33m ([m[1;31morigin/UrlFormat[m[33m)[m
+Author: Vishwas-1411 <vishwas.vankalapati@gogig.in>
+Date:   Mon Jun 3 10:34:09 2024 +0530
+
+    Changed the url format and added more details in it
+
+[33mcommit 2190d324d21f05e7873690987907dc278255cd2a[m
+Merge: 3763c5c d761a54
+Author: Vishwas Vankalaphati <141409979+Vishwas-1411@users.noreply.github.com>
+Date:   Wed May 29 19:06:42 2024 +0530
+
+    Merge pull request #3 from neogigogig/ServicePage
+    
+    Adding the service page & Route implementation
+
+[33mcommit d761a54c70454de4e441182de555ce49570bdbc5[m[33m ([m[1;31morigin/ServicePage[m[33m)[m
+Author: Vishwas-1411 <vishwas.vankalapati@gogig.in>
+Date:   Wed May 29 19:05:33 2024 +0530
+
+    Added details page and the filter component
+
+[33mcommit d3979ca0ad427d097380c081f729ee0da5ad8085[m
+Author: Vishwas-1411 <vishwas.vankalapati@gogig.in>
+Date:   Wed May 22 12:49:24 2024 +0530
+
+    Adding the service page & Route implementation
+
+[33mcommit 3763c5cba9a8dd3718b35fd89587229576361309[m
+Author: Devjit Neogi <devjit.neogi@cimpress.com>
+Date:   Fri Jan 12 16:30:28 2024 +0530
+
+    update import style for mui icons
+
+[33mcommit dc5eb4b3ea5efa0eb18b8e1f3a76e3dd0785efde[m
+Author: Devjit Neogi <devjit.neogi@cimpress.com>
+Date:   Fri Jan 12 16:18:27 2024 +0530
+
+    remove mui icon from footer
+
+[33mcommit c061105269cdba11f887190b8774873985a2dc28[m
+Author: Devjit Neogi <devjit.neogi@cimpress.com>
+Date:   Fri Jan 12 16:11:32 2024 +0530
+
+    remove watsapp icon from footer
+
+[33mcommit e8e474c63561676cfc71b111df57a2cbc9081dde[m
+Merge: d3072be c958394
+Author: suhasp347 <149654502+suhasp347@users.noreply.github.com>
+Date:   Thu Dec 28 15:15:56 2023 +0530
+
+    Merge pull request #2 from neogigogig/ssr
+    
+    changed to server side
+
+[33mcommit c958394f9c3b25d2eec9a787b6da2160ffdacbd8[m[33m ([m[1;31morigin/ssr[m[33m)[m
+Author: suhasp347 <suhas.p@gogig.in>
+Date:   Thu Dec 28 15:11:17 2023 +0530
+
+    Chnged to srr
+
+[33mcommit ca7cba7d4f14c51613389015631c80d89819ff29[m
+Author: Devjit Neogi <devjit.neogi@cimpress.com>
+Date:   Mon Dec 25 14:38:17 2023 +0530
+
+    Make ssr enabled for both pages
+
+[33mcommit d55b37b89b2fca5084bebd4182edd7dc7e6afeb7[m
+Author: suhasp347 <suhas.p@gogig.in>
+Date:   Sun Dec 24 09:50:33 2023 +0530
+
+    changed to server side
+
+[33mcommit d3072be6d1ac91b113b64b5bbc8c7c610fab53de[m
+Author: suhasp347 <suhas.p@gogig.in>
+Date:   Fri Dec 15 17:57:57 2023 +0530
+
+    Chnages to filter and search
+
+[33mcommit 7990f4b7b517a7289e87c9d32ac97c8a3031fd3b[m
+Author: suhasp347 <suhas.p@gogig.in>
+Date:   Fri Dec 15 17:14:56 2023 +0530
+
+    Chnages to filter and search
+
+[33mcommit e46706a37462b012500ee7b2898988ae0c556042[m
+Author: suhasp347 <suhas.p@gogig.in>
+Date:   Thu Dec 14 16:09:28 2023 +0530
+
+    Responsive
+
+[33mcommit a390c67bd4e121955048755adc8ccffe99237ef7[m
+Author: suhasp347 <suhas.p@gogig.in>
+Date:   Thu Dec 14 15:21:55 2023 +0530
+
+    changed resposive
+
+[33mcommit 3ca82a0d578118617061ec994f02aee8e18732e0[m
+Author: suhasp347 <suhas.p@gogig.in>
+Date:   Thu Dec 14 10:30:33 2023 +0530
+
+    changed .tsx file
+
+[33mcommit 0ff32402544814462b90b9c347332d9ba9ef769c[m
+Author: Devjit Neogi <devjit.neogi@cimpress.com>
+Date:   Tue Nov 28 12:54:28 2023 +0530
+
+    Initial commit from Create Next App

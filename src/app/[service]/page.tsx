@@ -10,14 +10,17 @@ import {
   Link,
   Breadcrumbs,
 } from "@mui/material";
-import { serviceAndMediaType, urlMapperServiceAndMediaType } from "@/component/mappers/service&MediaType";
+import {
+  serviceAndMediaType,
+  urlMapperServiceAndMediaType,
+} from "@/component/mappers/service&MediaType";
 import FilterComponent, {
   FilterData,
 } from "@/component/ServicePageComponents/FilterComponent";
 import { getFilters } from "@/clients/getFilters";
 import { getMediaDetailsByServiceAndFilter } from "@/clients/getMediaDetailsByService&Filter";
 import ParamsDisplayComponent from "@/component/ServicePageComponents/Paginartion";
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 interface ServicePageProps {
   params: { service: string };
@@ -29,7 +32,10 @@ const ServicePage = async ({ params, searchParams }: ServicePageProps) => {
   const filters: FilterData = await getFilters(service);
 
   const formatStringToUrl = (input: string): string => {
-    return input.toLowerCase().replace(/\s+/g, '-');
+    return input
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, "")
+      .replace(/\s+/g, "-");
   };
 
   const breadcrumbs = [
@@ -48,7 +54,7 @@ const ServicePage = async ({ params, searchParams }: ServicePageProps) => {
       if (isFiltersApplied) {
         const response: any = await getMediaDetailsByServiceAndFilter(
           service,
-          searchParams,
+          searchParams
         );
         const mediaList = response.data;
         if (!mediaList || mediaList.length === 0) {
@@ -104,7 +110,11 @@ const ServicePage = async ({ params, searchParams }: ServicePageProps) => {
                   </CardContent>
                   <CardActions>
                     <Link
-                      href={`/${service}/${urlMapperServiceAndMediaType[media.mediaType]}-${formatStringToUrl(media.location)}-${formatStringToUrl(media.city)}/${media.id}`}
+                      href={`/${service}/${
+                        urlMapperServiceAndMediaType[media.mediaType]
+                      }-${formatStringToUrl(
+                        media.area
+                      )}-${formatStringToUrl(media.city)}/${media.id}`}
                       style={{
                         color: "blue",
                         padding: "5px 5px",
@@ -118,7 +128,7 @@ const ServicePage = async ({ params, searchParams }: ServicePageProps) => {
               </Grid>
             ))}
           </Grid>
-          <Box sx={{marginTop: "15px"}}>
+          <Box sx={{ marginTop: "15px" }}>
             <ParamsDisplayComponent
               params={params}
               searchParams={searchParams}

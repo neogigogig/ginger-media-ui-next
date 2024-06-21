@@ -1,6 +1,17 @@
-import { Typography, Box, Paper, Grid, Link, Breadcrumbs } from "@mui/material";
+import {
+  Typography,
+  Box,
+  Paper,
+  Grid,
+  Link,
+  Breadcrumbs,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+} from "@mui/material";
 import { getMediaDataById } from "@/clients/getMediaDataById";
-import Image from "next/image";
 import { description } from "@/component/detailsPage/detailsPageDescription";
 import { serviceAndMediaType } from "@/component/mappers/service&MediaType";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
@@ -77,75 +88,135 @@ const DetailsPage = async ({ params }: DetailsPageProps) => {
     <Link underline="hover" key="2" color="inherit" href={`/${service}`}>
       {serviceAndMediaType[service]}
     </Link>,
-    <Typography key="3" color="text.primary">
-      {serviceAndMediaType[mediaDetails.mediaType]} - {mediaDetails.location}
+    <Typography
+      key="3"
+      color="text.primary"
+      sx={{ textDecoration: "underline" }}
+    >
+      {serviceAndMediaType[mediaDetails.mediaType]} - {mediaDetails.area}
     </Typography>,
   ];
 
   return (
     <Box>
       <Breadcrumbs
+        sx={{ margin: "8px 4px" }}
         separator={<NavigateNextIcon fontSize="small" />}
         aria-label="breadcrumb"
       >
         {breadcrumbs}
       </Breadcrumbs>
       {mediaDetails ? (
-        <>
-          <div>
-            <Typography variant="h5">
-              Advertising on {serviceAndMediaType[mediaDetails.mediaType]} in{" "}
-              {mediaDetails.location} - {mediaId}
-            </Typography>
-          </div>
-          <Paper>
-            <Image src={mediaDetails.imageUrl} alt={mediaDetails.mediaType} />
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={7}>
-                <Typography>
-                  {description[mediaDetails.mediaType]
-                    ? description[mediaDetails.mediaType].replace(
-                        "{{city}}",
-                        mediaDetails.city
-                      )
-                    : "Description not available"}
-                </Typography>
-              </Grid>
-              <Grid item xs={12} sm={5}>
-                <Typography variant="h6">Key Insight</Typography>
-                <Typography>
-                  Media Type: {serviceAndMediaType[mediaDetails.mediaType]}
-                </Typography>
-                <Typography>City: {mediaDetails.city}</Typography>
-                <Typography>
-                  Location: {mediaDetails.location} near {mediaDetails.landmark}
-                </Typography>
-                <Typography>
-                  Towards: {JSON.parse(mediaDetails.additionalDetails).towards}
-                </Typography>
-                <Typography>Media Id: {mediaId}</Typography>
-                <Typography>
-                  Illumination:{" "}
-                  {filterOptions["lighting"][mediaDetails.lighting]}
-                </Typography>
-                <Typography>Area: {mediaDetails.areaInSqFeet} sq.ft</Typography>
-              </Grid>
+        <Paper elevation={0}>
+          <Typography variant="h5" sx={{ padding: "12px" }}>
+            Advertising on {serviceAndMediaType[mediaDetails.mediaType]} in{" "}
+            {mediaDetails.area} - {mediaId}
+          </Typography>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={4}>
+              <img
+                src={mediaDetails.imageUrl}
+                alt={mediaDetails.mediaType}
+                style={{
+                  maxWidth: "400px",
+                  maxHeight: "400px",
+                  width: "100%",
+                  height: "100%",
+                  padding: "10px",
+                }}
+              />
             </Grid>
-          </Paper>
-          <Grid container justifyContent="center" alignItems="center">
-            <Grid item xs={12} sm={10} md={8} lg={6}>
-              <Paper elevation={3}>
+            <Grid item xs={12} sm={8}>
+              <Typography sx={{ padding: "8px", textAlign: "justify" }}>
+                {description[mediaDetails.mediaType]
+                  ? description[mediaDetails.mediaType].replace(
+                      "{{city}}",
+                      `${mediaDetails.area}, ${mediaDetails.city}`
+                    )
+                  : "Description not available"}
+              </Typography>
+            </Grid>
+          </Grid>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={7}>
+              <Typography
+                sx={{ fontSize: "22px", fontWeight: "600", padding: "8px" }}
+              >
+                Key Insights
+              </Typography>
+              <TableContainer>
+                <Table>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell>Media Type</TableCell>
+                      <TableCell>
+                        {serviceAndMediaType[mediaDetails.mediaType]}
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>City</TableCell>
+                      <TableCell>{mediaDetails.city}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Area</TableCell>
+                      <TableCell>{mediaDetails.area}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Location</TableCell>
+                      <TableCell>
+                        {mediaDetails.location}
+                        {mediaDetails.landmark
+                          ? ` near ${mediaDetails.landmark}`
+                          : ""}
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Media Id</TableCell>
+                      <TableCell>{mediaId}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Illumination</TableCell>
+                      <TableCell>
+                        {filterOptions["lighting"][mediaDetails.lighting]}
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Price</TableCell>
+                      <TableCell>₹ {mediaDetails.price}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Area(sq.ft)</TableCell>
+                      <TableCell>{mediaDetails.areaInSqFeet} sq.ft</TableCell>
+                    </TableRow>
+                    {JSON.parse(mediaDetails.additionalDetails).period && (
+                      <TableRow>
+                        <TableCell>Period</TableCell>
+                        <TableCell>
+                          {JSON.parse(mediaDetails.additionalDetails).period}
+                        </TableCell>
+                      </TableRow>
+                    )}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Grid>
+            <Grid item xs={12} sm={5}>
+              <Box sx={{ padding: "32px" }}>
                 <iframe
                   src={`https://maps.google.com/maps?q=${mediaDetails.latitude},${mediaDetails.longitude}&z=15&output=embed`}
-                  width={200}
-                  height={200}
+                  style={{
+                    maxHeight: "500px",
+                    minHeight: "300px",
+                    width: "100%",
+                    height: "100%",
+                  }}
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                 />
-              </Paper>
+              </Box>
             </Grid>
           </Grid>
-        </>
+        </Paper>
       ) : (
         <Typography variant="body1">No details available</Typography>
       )}

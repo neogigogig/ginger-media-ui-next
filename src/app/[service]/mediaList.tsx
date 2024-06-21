@@ -26,8 +26,15 @@ interface MediaListProps {
   mediaTypes: string | undefined;
 }
 
-const formatStringToUrl = (input: string): string => {
-  return input.toLowerCase().replace(/\s+/g, "-");
+const formatStringToUrl = (input: string | undefined | null): string => {
+  if (typeof input !== "string") {
+    return "";
+  }
+
+  return input
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-");
 };
 
 const MediaList: React.FC<MediaListProps> = ({
@@ -76,7 +83,7 @@ const MediaList: React.FC<MediaListProps> = ({
               <Link
                 href={`/${service}/${
                   urlMapperServiceAndMediaType[media.mediaType]
-                }-${formatStringToUrl(media.location)}-${formatStringToUrl(
+                }-${formatStringToUrl(media.area)}-${formatStringToUrl(
                   media.city
                 )}/${media.id}`}
                 style={{

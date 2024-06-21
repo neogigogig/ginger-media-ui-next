@@ -6,6 +6,7 @@ export interface MediaDetail {
   city: string;
   price: number;
   areaInSqFeet: number;
+  area: string;
 }
 
 export type Service =

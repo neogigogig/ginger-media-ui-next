@@ -59,6 +59,7 @@ const ServicePage = async ({ params, searchParams }: ServicePageProps) => {
   return (
     <Box>
       <Breadcrumbs
+        sx={{ margin: "8px 4px" }}
         separator={<NavigateNextIcon fontSize="small" />}
         aria-label="breadcrumb"
       >

@@ -5,7 +5,8 @@ export async function getMediaDetailsByService(
   page: number,
   pageSize: number,
   cities: string | undefined,
-  mediaTypes: string | undefined
+  mediaTypes: string | undefined,
+  lighting: string | undefined,
 ) {
   const params = new URLSearchParams({
     service,
@@ -13,6 +14,7 @@ export async function getMediaDetailsByService(
     pageSize: `${pageSize}`,
     ...(cities ? { cities } : {}), // cities could be undefined
     ...(mediaTypes ? { mediaTypes } : {}), // mediaType could be undefined
+    ...(lighting ? {lighting} : {}),
   });
 
   const url = `${BaseUrl}/getMediaDetailsByService?${params.toString()}`;

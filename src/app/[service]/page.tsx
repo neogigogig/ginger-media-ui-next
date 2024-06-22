@@ -19,6 +19,7 @@ interface ServicePageProps {
 interface SearchParamType {
   cities: string | undefined;
   mediaTypes: string | undefined;
+  lighting: string | undefined;
 }
 
 export async function generateMetadata({
@@ -46,14 +47,15 @@ const ServicePage = async ({ params, searchParams }: ServicePageProps) => {
     </Typography>,
   ];
 
-  const { cities, mediaTypes } = searchParams as unknown as SearchParamType;
+  const { cities, mediaTypes, lighting } = searchParams as unknown as SearchParamType;
 
   const mediaDetails = await fetchMedia(
     service,
     DefaultPage,
     DefaultPageSize,
     cities,
-    mediaTypes
+    mediaTypes,
+    lighting,
   );
 
   return (
@@ -74,6 +76,7 @@ const ServicePage = async ({ params, searchParams }: ServicePageProps) => {
               service={service}
               cities={cities}
               mediaTypes={mediaTypes}
+              lighting={lighting}
             />
           </Grid>
         </Box>

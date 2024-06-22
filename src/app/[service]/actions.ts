@@ -8,18 +8,20 @@ export async function fetchMedia(
   page: number,
   pageSize: number,
   cities: string | undefined,
-  mediaTypes: string | undefined
+  mediaTypes: string | undefined,
+  lighting: string | undefined,
 ) {
   const response: any = await getMediaDetailsByService(
     service,
     page,
     pageSize,
     cities,
-    mediaTypes
+    mediaTypes,
+    lighting,
   );
   const mediaList = response.data;
   if (!mediaList || mediaList.length === 0) {
     return null;
   }
-  return response.data;
+  return mediaList;
 }

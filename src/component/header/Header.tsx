@@ -15,7 +15,7 @@ const Header = () => {
           }}
         >
           <Box sx={{ display: "flex", justifyContent: "flex-start" }}>
-            <Link href="/">
+            <Link href="https://www.gingermediagroup.com">
               <Logo />
             </Link>
           </Box>

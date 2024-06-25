@@ -163,13 +163,14 @@ const DetailsPage = async ({ params }: DetailsPageProps) => {
                     </TableRow>
                     <TableRow>
                       <TableCell>Location</TableCell>
-                      <TableCell>
-                        {mediaDetails.location}
-                        {mediaDetails.landmark
-                          ? ` near ${mediaDetails.landmark}`
-                          : ""}
-                      </TableCell>
+                      <TableCell>{mediaDetails.location}</TableCell>
                     </TableRow>
+                    {mediaDetails.landmark && (
+                      <TableRow>
+                        <TableCell>Landmark</TableCell>
+                        <TableCell>{mediaDetails.landmark}</TableCell>
+                      </TableRow>
+                    )}
                     <TableRow>
                       <TableCell>Media Id</TableCell>
                       <TableCell>{mediaId}</TableCell>

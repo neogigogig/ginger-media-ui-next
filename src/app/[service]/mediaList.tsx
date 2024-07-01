@@ -17,12 +17,12 @@ import {
 } from "@/component/mappers/service&MediaType";
 import { MediaDetail, Service } from "./types";
 import { fetchMedia } from "./actions";
-import { DefaultPageSize } from "./constants";
 import { cityMapper } from "@/component/mappers/cityMapper";
 
 interface MediaListProps {
   service: Service;
   initialMediaDetails: MediaDetail[];
+  nextOffset: number;
   cities: string | undefined;
   mediaTypes: string | undefined;
   lighting: string | undefined;
@@ -42,50 +42,63 @@ const formatStringToUrl = (input: string | undefined | null): string => {
 const MediaList: React.FC<MediaListProps> = ({
   service,
   initialMediaDetails,
+  nextOffset,
   cities,
   mediaTypes,
   lighting,
 }) => {
   const [mediaDetails, setMediaDetails] = useState(initialMediaDetails);
-  const [page, setPage] = useState(2);
+  const [offset, setOffset] = useState(nextOffset);
 
   useEffect(() => {
     setMediaDetails(initialMediaDetails);
-    setPage(2); // Reset to the second page for subsequent loads
+    setOffset(nextOffset); // Reset to the second page for subsequent loads
   }, [initialMediaDetails]);
 
   async function loadMore() {
-    const mediaList = await fetchMedia(
+    const response = await fetchMedia(
       service,
-      page,
-      DefaultPageSize,
+      offset,
       cities,
       mediaTypes,
       lighting
     );
+    const mediaList = response?.mediaList;
+    const nextOffset = response?.nextOffset;
     setMediaDetails((prevMediaDetails) => [...prevMediaDetails, ...mediaList]);
-    setPage((prevPage) => prevPage + 1);
+    setOffset(nextOffset);
   }
 
   return (
-    <>
+    <Box sx={{ display: "flex", flexWrap: "wrap" }}>
       {mediaDetails.map((media) => (
-        <Grid item xs={12} sm={6} md={4} key={media.id}>
-          <Card>
+        <Box
+          key={media.id}
+          sx={{
+            flex: "1 1 calc(33.333% - 16px)",
+            margin: "8px",
+            display: "flex",
+            flexDirection: "column",
+            marginTop: "24px",
+          }}
+        >
+          <Card
+            sx={{ display: "flex", flexDirection: "column", flex: "1 1 auto" }}
+          >
             <CardMedia sx={{ height: 190 }} image={media.imageUrl} />
-            <CardContent sx={{padding: "10px 10px 0 10px"}}>
+            <CardContent sx={{ flex: "1 1 auto", padding: "10px 10px 0 10px" }}>
               <Typography gutterBottom variant="h6" component="div">
                 {serviceAndMediaType[media.mediaType] || media.mediaType}-
                 {media.location}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+            </CardContent>
+            <CardActions sx={{ flexDirection: "column", alignItems: "flex-start", padding: "0px 10px" }}>
+              <Typography sx={{ fontSize: "16px", fontWeight: "600" }}>
                 {cityMapper[media.city.toLowerCase()] || media.city}
               </Typography>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={5}>
-                  <Typography>
-                    Price: {media.price}
-                  </Typography>
+                  <Typography>Price: {media.price}</Typography>
                 </Grid>
                 <Grid item xs={12} sm={7}>
                   <Typography>
@@ -93,8 +106,6 @@ const MediaList: React.FC<MediaListProps> = ({
                   </Typography>
                 </Grid>
               </Grid>
-            </CardContent>
-            <CardActions>
               <Link
                 href={`/${service}/${
                   urlMapperServiceAndMediaType[media.mediaType]
@@ -111,22 +122,24 @@ const MediaList: React.FC<MediaListProps> = ({
               </Link>
             </CardActions>
           </Card>
-        </Grid>
+        </Box>
       ))}
-      <button
-        onClick={loadMore}
-        style={{
-          color: "white",
-          backgroundColor: "#ff6702",
-          padding: "10px",
-          margin: "12px",
-          fontWeight: "600",
-          borderRadius: "5px",
-        }}
-      >
-        Load More ...
-      </button>
-    </>
+      {offset !== null && (
+        <button
+          onClick={loadMore}
+          style={{
+            color: "white",
+            backgroundColor: "#ff6702",
+            padding: "10px",
+            margin: "12px",
+            fontWeight: "600",
+            borderRadius: "5px",
+          }}
+        >
+          Load More ...
+        </button>
+      )}
+    </Box>
   );
 };
 

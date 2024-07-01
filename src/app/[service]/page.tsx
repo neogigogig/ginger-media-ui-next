@@ -9,7 +9,7 @@ import { Metadata } from "next/types";
 import { fetchMedia } from "./actions";
 import MediaList from "./mediaList";
 import { Service } from "./types";
-import { DefaultPage, DefaultPageSize } from "./constants";
+import { DefaultOffset } from "./constants";
 
 interface ServicePageProps {
   params: { service: string };
@@ -42,21 +42,28 @@ const ServicePage = async ({ params, searchParams }: ServicePageProps) => {
     <Link underline="hover" key="1" color="inherit" href="/">
       Home
     </Link>,
-    <Typography key="3" color="text.primary">
+    <Typography
+      key="2"
+      color="text.primary"
+      sx={{ textDecoration: "underline" }}
+    >
       {serviceAndMediaType[service]}
     </Typography>,
   ];
 
-  const { cities, mediaTypes, lighting } = searchParams as unknown as SearchParamType;
+  const { cities, mediaTypes, lighting } =
+    searchParams as unknown as SearchParamType;
 
-  const mediaDetails = await fetchMedia(
+  const response = await fetchMedia(
     service,
-    DefaultPage,
-    DefaultPageSize,
+    DefaultOffset,
     cities,
     mediaTypes,
-    lighting,
+    lighting
   );
+
+  const mediaDetails = response?.mediaList;
+  const nextOffset = response?.nextOffset;
 
   return (
     <Box>
@@ -73,6 +80,7 @@ const ServicePage = async ({ params, searchParams }: ServicePageProps) => {
           <Grid container spacing={2}>
             <MediaList
               initialMediaDetails={mediaDetails}
+              nextOffset={nextOffset}
               service={service}
               cities={cities}
               mediaTypes={mediaTypes}

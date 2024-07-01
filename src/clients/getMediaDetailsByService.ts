@@ -2,16 +2,14 @@ import { BaseUrl } from "./BaseUrl";
 
 export async function getMediaDetailsByService(
   service: string,
-  page: number,
-  pageSize: number,
+  offset: number,
   cities: string | undefined,
   mediaTypes: string | undefined,
   lighting: string | undefined,
 ) {
   const params = new URLSearchParams({
     service,
-    page: `${page}`,
-    pageSize: `${pageSize}`,
+    offset: `${offset}`,
     ...(cities ? { cities } : {}), // cities could be undefined
     ...(mediaTypes ? { mediaTypes } : {}), // mediaType could be undefined
     ...(lighting ? {lighting} : {}),

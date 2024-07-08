@@ -73,7 +73,7 @@ const MediaList: React.FC<MediaListProps> = ({
     <Box sx={{ display: "flex", flexWrap: "wrap" }}>
       {mediaDetails.map((media) => (
         <Box
-          key={media.id}
+          key={media.gmgAssetCode}
           sx={{
             flex: "1 1 calc(33.333% - 16px)",
             margin: "8px",
@@ -88,7 +88,7 @@ const MediaList: React.FC<MediaListProps> = ({
             <CardMedia sx={{ height: 190 }} image={media.imageUrl} />
             <CardContent sx={{ flex: "1 1 auto", padding: "10px 10px 0 10px" }}>
               <Typography gutterBottom variant="h6" component="div">
-                {serviceAndMediaType[media.mediaType] || media.mediaType}-
+                {serviceAndMediaType[media.medium] || media.medium} - {" "}
                 {media.location}
               </Typography>
             </CardContent>
@@ -97,10 +97,10 @@ const MediaList: React.FC<MediaListProps> = ({
                 {cityMapper[media.city.toLowerCase()] || media.city}
               </Typography>
               <Grid container spacing={2}>
-                <Grid item xs={12} sm={5}>
-                  <Typography>Price: {media.price}</Typography>
+                <Grid item xs={12} sm={6}>
+                  <Typography>Price: {media.displayCostPerMonth}/month</Typography>
                 </Grid>
-                <Grid item xs={12} sm={7}>
+                <Grid item xs={12} sm={6}>
                   <Typography>
                     Area(sq.ft): {media.areaInSqFeet} sq.ft
                   </Typography>
@@ -108,10 +108,10 @@ const MediaList: React.FC<MediaListProps> = ({
               </Grid>
               <Link
                 href={`/${service}/${
-                  urlMapperServiceAndMediaType[media.mediaType]
+                  urlMapperServiceAndMediaType[media.medium]
                 }-${formatStringToUrl(media.area)}-${formatStringToUrl(
                   media.city
-                )}/${media.id}`}
+                )}/${media.gmgAssetCode}`}
                 style={{
                   color: "blue",
                   padding: "5px 5px",

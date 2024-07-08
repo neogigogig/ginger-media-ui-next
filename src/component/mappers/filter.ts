@@ -12,8 +12,11 @@ export const filterOptions: { [key in FilterCategory]: { [key: string]: string }
     poleKiosk: "Pole Kiosk",
     gantry: "Gantry",
     skyWalk: "Sky Walk",
+    billboard: "Billboard",
+    unipole: "Unipole",
   },
   lighting: {
+    lit: "Lit",
     backLit: "Back Lit",
     nonLit: "Non Lit",
     frontLit: "Front Lit",

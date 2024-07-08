@@ -93,7 +93,7 @@ const DetailsPage = async ({ params }: DetailsPageProps) => {
       color="text.primary"
       sx={{ textDecoration: "underline" }}
     >
-      {serviceAndMediaType[mediaDetails.mediaType]} - {mediaDetails.area}
+      {serviceAndMediaType[mediaDetails.medium]} - {mediaDetails.area}
     </Typography>,
   ];
 
@@ -109,14 +109,14 @@ const DetailsPage = async ({ params }: DetailsPageProps) => {
       {mediaDetails ? (
         <Paper elevation={0}>
           <Typography variant="h5" sx={{ padding: "12px" }}>
-            Advertising on {serviceAndMediaType[mediaDetails.mediaType]} in{" "}
+            Advertising on {serviceAndMediaType[mediaDetails.medium]} in{" "}
             {mediaDetails.area} - {mediaId}
           </Typography>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={4}>
               <img
                 src={mediaDetails.imageUrl}
-                alt={mediaDetails.mediaType}
+                alt={mediaDetails.medium}
                 style={{
                   maxWidth: "400px",
                   maxHeight: "400px",
@@ -128,8 +128,8 @@ const DetailsPage = async ({ params }: DetailsPageProps) => {
             </Grid>
             <Grid item xs={12} sm={8}>
               <Typography sx={{ padding: "8px", textAlign: "justify" }}>
-                {description[mediaDetails.mediaType]
-                  ? description[mediaDetails.mediaType].replace(
+                {description[mediaDetails.medium]
+                  ? description[mediaDetails.medium].replace(
                       "{{city}}",
                       `${mediaDetails.area}, ${mediaDetails.city}`
                     )
@@ -150,7 +150,7 @@ const DetailsPage = async ({ params }: DetailsPageProps) => {
                     <TableRow>
                       <TableCell>Media Type</TableCell>
                       <TableCell>
-                        {serviceAndMediaType[mediaDetails.mediaType]}
+                        {serviceAndMediaType[mediaDetails.medium]}
                       </TableCell>
                     </TableRow>
                     <TableRow>
@@ -173,17 +173,19 @@ const DetailsPage = async ({ params }: DetailsPageProps) => {
                     )}
                     <TableRow>
                       <TableCell>Media Id</TableCell>
-                      <TableCell>{mediaId}</TableCell>
+                      <TableCell>{mediaDetails.gmgAssetCode}</TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell>Illumination</TableCell>
                       <TableCell>
-                        {filterOptions["lighting"][mediaDetails.lighting]}
+                        {filterOptions["lighting"][mediaDetails.type]}
                       </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell>Price</TableCell>
-                      <TableCell>₹ {mediaDetails.price}</TableCell>
+                      <TableCell>
+                        ₹ {mediaDetails.displayCostPerMonth} per month
+                      </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell>Area(sq.ft)</TableCell>

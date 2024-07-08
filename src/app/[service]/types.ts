@@ -1,10 +1,10 @@
 export interface MediaDetail {
-  id: string;
-  mediaType: string;
+  gmgAssetCode: string;
+  medium: string;
   imageUrl: string;
   location: string;
   city: string;
-  price: number;
+  displayCostPerMonth: number;
   areaInSqFeet: number;
   area: string;
 }

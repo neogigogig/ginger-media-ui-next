@@ -5,7 +5,8 @@ export const serviceAndMediaType: { [key: string]: string } = {
     "poleKiosk": "Pole Kiosk",
     "gantry": "Gantry",
     "skyWalk": "Sky Walk",
-    "unipole": "Unipole"
+    "unipole": "Unipole",
+    "billboard": "Billboard",
   };
 
   export const urlMapperServiceAndMediaType: { [key: string]: string } = {

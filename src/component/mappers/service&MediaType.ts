@@ -16,5 +16,6 @@ export const serviceAndMediaType: { [key: string]: string } = {
     "poleKiosk": "pole-kiosk",
     "gantry": "gantry",
     "skyWalk": "sky-walk",
-    "unipole": "unipole"
+    "unipole": "unipole",
+    "billboard": "billboard",
   };

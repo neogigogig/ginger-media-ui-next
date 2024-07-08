@@ -1,1 +1,1 @@
-export const BaseUrl = `https://gjbq17jks3.execute-api.us-east-1.amazonaws.com/dev`;
+export const BaseUrl = process.env.GMG_API_BASE_URL;

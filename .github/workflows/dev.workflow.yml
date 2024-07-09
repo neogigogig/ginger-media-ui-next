@@ -1,0 +1,49 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20' # Change to the version your project uses
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build project
+      run: npm run build
+
+    - name: Zip the build directory
+      run: |
+        zip -r build.zip . -x node_modules/\*
+
+    - name: Add SSH key
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Copy zip to EC2
+      run: scp -o StrictHostKeyChecking=no build.zip ec2-user@ec2-54-164-253-91.compute-1.amazonaws.com:/home/ec2-user/ginger-media/ginger-media-ui-next
+
+    - name: SSH into EC2 and unzip build
+      run: |
+        ssh -o StrictHostKeyChecking=no ec2-user@ec2-54-164-253-91.compute-1.amazonaws.com << 'EOF'
+          cd /home/ec2-user/ginger-media/ginger-media-ui-next
+          sudo rm -r .next/
+          unzip -o build.zip
+          pm2 stop all
+          pm2 delete all
+          pm2 start npm --name "gmg" -- start
+          pm2 save
+        EOF

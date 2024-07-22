@@ -74,7 +74,9 @@ const ServicePage = async ({ params, searchParams }: ServicePageProps) => {
       >
         {breadcrumbs}
       </Breadcrumbs>
-      <FilterComponent params={params} initialFilters={filters} />
+      <Box sx={{margin: "10px 0px"}}>
+        <FilterComponent params={params} initialFilters={filters} />
+      </Box>
       {mediaDetails ? (
         <Box>
           <Grid container spacing={2}>

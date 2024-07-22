@@ -49,6 +49,23 @@ const DetailsPage = async ({ params }: DetailsPageProps) => {
   const service = params.service;
   const mediaId = params.details;
 
+  function formatPrice(num: number): string {
+    const numStr = num.toString().replace(/,/g, "");
+    const lastThreeDigits = numStr.slice(-3);
+    const otherDigits = numStr.slice(0, -3);
+
+    const formattedOtherDigits = otherDigits.replace(
+      /\B(?=(\d{2})+(?!\d))/g,
+      ","
+    );
+    const formattedNumber =
+      otherDigits.length > 0
+        ? `${formattedOtherDigits},${lastThreeDigits}`
+        : lastThreeDigits;
+
+    return formattedNumber;
+  }
+
   const mediaDetails = await (async () => {
     try {
       const response = await getMediaDataById(service, mediaId);
@@ -116,7 +133,7 @@ const DetailsPage = async ({ params }: DetailsPageProps) => {
             <Grid item xs={12} sm={4}>
               <img
                 src={mediaDetails.imageUrl}
-                alt={mediaDetails.medium}
+                alt={`${mediaDetails.medium} - ${mediaDetails.location}`}
                 style={{
                   maxWidth: "400px",
                   maxHeight: "400px",
@@ -184,7 +201,8 @@ const DetailsPage = async ({ params }: DetailsPageProps) => {
                     <TableRow>
                       <TableCell>Price</TableCell>
                       <TableCell>
-                        ₹ {mediaDetails.displayCostPerMonth} per month
+                        ₹ {formatPrice(mediaDetails.displayCostPerMonth)} per
+                        month
                       </TableCell>
                     </TableRow>
                     <TableRow>

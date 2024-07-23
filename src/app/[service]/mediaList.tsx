@@ -142,7 +142,7 @@ const MediaList: React.FC<MediaListProps> = ({
                     urlMapperServiceAndMediaType[media.medium]
                   }-${formatStringToUrl(media.area)}-${formatStringToUrl(
                     media.city
-                  )}/${media.gmgAssetCode}`}
+                  )}/${media.gmgAssetCode.toLowerCase()}`}
                   style={{
                     color: "blue",
                     padding: "5px 5px",

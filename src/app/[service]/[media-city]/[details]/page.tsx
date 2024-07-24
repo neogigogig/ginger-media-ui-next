@@ -49,9 +49,28 @@ const DetailsPage = async ({ params }: DetailsPageProps) => {
   const service = params.service;
   const mediaId = params.details;
 
+  const assetId = mediaId.toUpperCase();
+
+  function formatPrice(num: number): string {
+    const numStr = num.toString().replace(/,/g, "");
+    const lastThreeDigits = numStr.slice(-3);
+    const otherDigits = numStr.slice(0, -3);
+
+    const formattedOtherDigits = otherDigits.replace(
+      /\B(?=(\d{2})+(?!\d))/g,
+      ","
+    );
+    const formattedNumber =
+      otherDigits.length > 0
+        ? `${formattedOtherDigits},${lastThreeDigits}`
+        : lastThreeDigits;
+
+    return formattedNumber;
+  }
+
   const mediaDetails = await (async () => {
     try {
-      const response = await getMediaDataById(service, mediaId);
+      const response = await getMediaDataById(service, assetId);
       return response;
     } catch (error) {
       console.error("Failed to fetch media details", error);
@@ -110,13 +129,13 @@ const DetailsPage = async ({ params }: DetailsPageProps) => {
         <Paper elevation={0}>
           <Typography variant="h5" sx={{ padding: "12px" }}>
             Advertising on {serviceAndMediaType[mediaDetails.medium]} in{" "}
-            {mediaDetails.area} - {mediaId}
+            {mediaDetails.area} - {assetId}
           </Typography>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={4}>
               <img
                 src={mediaDetails.imageUrl}
-                alt={mediaDetails.medium}
+                alt={`${mediaDetails.medium} - ${mediaDetails.location}`}
                 style={{
                   maxWidth: "400px",
                   maxHeight: "400px",
@@ -184,7 +203,8 @@ const DetailsPage = async ({ params }: DetailsPageProps) => {
                     <TableRow>
                       <TableCell>Price</TableCell>
                       <TableCell>
-                        ₹ {mediaDetails.displayCostPerMonth} per month
+                        ₹ {formatPrice(mediaDetails.displayCostPerMonth)} per
+                        month
                       </TableCell>
                     </TableRow>
                     <TableRow>
@@ -204,19 +224,24 @@ const DetailsPage = async ({ params }: DetailsPageProps) => {
               </TableContainer>
             </Grid>
             <Grid item xs={12} sm={5}>
-              <Box sx={{ padding: "32px" }}>
-                <iframe
-                  src={`https://maps.google.com/maps?q=${mediaDetails.latitude},${mediaDetails.longitude}&z=15&output=embed`}
-                  style={{
-                    maxHeight: "500px",
-                    minHeight: "300px",
-                    width: "100%",
-                    height: "100%",
-                  }}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-              </Box>
+              {mediaDetails.latitude &&
+                mediaDetails.longitude &&
+                mediaDetails.latitude !== 0 &&
+                mediaDetails.longitude !== 0 && (
+                  <Box sx={{ padding: "32px" }}>
+                    <iframe
+                      src={`https://maps.google.com/maps?q=${mediaDetails.latitude},${mediaDetails.longitude}&z=15&output=embed`}
+                      style={{
+                        maxHeight: "500px",
+                        minHeight: "300px",
+                        width: "100%",
+                        height: "100%",
+                      }}
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    />
+                  </Box>
+                )}
             </Grid>
           </Grid>
         </Paper>

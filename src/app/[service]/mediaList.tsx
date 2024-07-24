@@ -69,61 +69,93 @@ const MediaList: React.FC<MediaListProps> = ({
     setOffset(nextOffset);
   }
 
+  function formatPrice(num: number): string {
+    const numStr = num.toString().replace(/,/g, "");
+    const lastThreeDigits = numStr.slice(-3);
+    const otherDigits = numStr.slice(0, -3);
+
+    const formattedOtherDigits = otherDigits.replace(
+      /\B(?=(\d{2})+(?!\d))/g,
+      ","
+    );
+    const formattedNumber =
+      otherDigits.length > 0
+        ? `${formattedOtherDigits},${lastThreeDigits}`
+        : lastThreeDigits;
+
+    return formattedNumber;
+  }
+
   return (
-    <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-      {mediaDetails.map((media) => (
-        <Box
-          key={media.gmgAssetCode}
-          sx={{
-            flex: "1 1 calc(33.333% - 16px)",
-            margin: "8px",
-            display: "flex",
-            flexDirection: "column",
-            marginTop: "24px",
-          }}
-        >
-          <Card
-            sx={{ display: "flex", flexDirection: "column", flex: "1 1 auto" }}
+    <Box sx={{ flexGrow: 1, marginLeft: "16px" }}>
+      <Grid container spacing={2}>
+        {mediaDetails.map((media) => (
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            key={media.gmgAssetCode}
+            sx={{ marginTop: "12px"}}
           >
-            <CardMedia sx={{ height: 190 }} image={media.imageUrl} />
-            <CardContent sx={{ flex: "1 1 auto", padding: "10px 10px 0 10px" }}>
-              <Typography gutterBottom variant="h6" component="div">
-                {serviceAndMediaType[media.medium] || media.medium} - {" "}
-                {media.location}
-              </Typography>
-            </CardContent>
-            <CardActions sx={{ flexDirection: "column", alignItems: "flex-start", padding: "0px 10px" }}>
-              <Typography sx={{ fontSize: "16px", fontWeight: "600" }}>
-                {cityMapper[media.city.toLowerCase()] || media.city}
-              </Typography>
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                  <Typography>Price: {media.displayCostPerMonth}/month</Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography>
-                    Area(sq.ft): {media.areaInSqFeet} sq.ft
-                  </Typography>
-                </Grid>
-              </Grid>
-              <Link
-                href={`/${service}/${
-                  urlMapperServiceAndMediaType[media.medium]
-                }-${formatStringToUrl(media.area)}-${formatStringToUrl(
-                  media.city
-                )}/${media.gmgAssetCode}`}
-                style={{
-                  color: "blue",
-                  padding: "5px 5px",
-                  textDecoration: "none",
+            <Card
+              sx={{ display: "flex", flexDirection: "column", height: "100%" }}
+            >
+              <CardMedia
+                component="img"
+                sx={{ height: 190 }}
+                image={media.imageUrl}
+                alt={`${serviceAndMediaType[media.medium] || media.medium} - ${
+                  media.location
+                }`}
+              />
+              <CardContent sx={{ flexGrow: 1, padding: "10px 10px 0 10px" }}>
+                <Typography gutterBottom variant="h6" component="div">
+                  {serviceAndMediaType[media.medium] || media.medium} -{" "}
+                  {media.location}
+                </Typography>
+              </CardContent>
+              <CardActions
+                sx={{
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  padding: "0px 10px",
                 }}
               >
-                Learn More
-              </Link>
-            </CardActions>
-          </Card>
-        </Box>
-      ))}
+                <Typography sx={{ fontSize: "16px", fontWeight: "600" }}>
+                  {cityMapper[media.city.toLowerCase()] || media.city}
+                </Typography>
+                <Grid container spacing={1}>
+                  <Grid item xs={12} sm={6}>
+                    <Typography>
+                      Price: {formatPrice(media.displayCostPerMonth)}/month
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <Typography>
+                      Area(sq.ft): {media.areaInSqFeet} sq.ft
+                    </Typography>
+                  </Grid>
+                </Grid>
+                <Link
+                  href={`/${service}/${
+                    urlMapperServiceAndMediaType[media.medium]
+                  }-${formatStringToUrl(media.area)}-${formatStringToUrl(
+                    media.city
+                  )}/${media.gmgAssetCode.toLowerCase()}`}
+                  style={{
+                    color: "blue",
+                    padding: "5px 5px",
+                    textDecoration: "none",
+                  }}
+                >
+                  Learn More
+                </Link>
+              </CardActions>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
       {offset !== null && (
         <button
           onClick={loadMore}

@@ -127,11 +127,11 @@ const DetailsPage = async ({ params }: DetailsPageProps) => {
       </Breadcrumbs>
       {mediaDetails ? (
         <Paper elevation={0}>
-          <Typography variant="h5" sx={{ padding: "12px" }}>
+          <Typography variant="h5" component="h5" sx={{ padding: "12px", fontWeight: "bold" }}>
             Advertising on {serviceAndMediaType[mediaDetails.medium]} in{" "}
             {mediaDetails.area} - {assetId}
           </Typography>
-          <Grid container spacing={2}>
+          <Grid component="section" container spacing={2}>
             <Grid item xs={12} sm={4}>
               <img
                 src={mediaDetails.imageUrl}
@@ -156,10 +156,15 @@ const DetailsPage = async ({ params }: DetailsPageProps) => {
               </Typography>
             </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid component="section" container spacing={2}>
+            <Grid item xs={12} sm={12}>
+              <Typography variant="h6" component="h6">
+                Location: {mediaDetails.location}
+              </Typography>
+            </Grid>
             <Grid item xs={12} sm={7}>
               <Typography
-                sx={{ fontSize: "22px", fontWeight: "600", padding: "8px" }}
+                sx={{ fontSize: "22px", fontWeight: "600" }}
               >
                 Key Insights
               </Typography>

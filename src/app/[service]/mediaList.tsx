@@ -99,7 +99,7 @@ const MediaList: React.FC<MediaListProps> = ({
             sx={{ marginTop: "12px"}}
           >
             <Card
-              sx={{ display: "flex", flexDirection: "column", height: "100%" }}
+              sx={{ display: "flex", flexDirection: "column", height: "100%", flex: "1 1 auto" }}
             >
               <CardMedia
                 component="img"
@@ -110,7 +110,7 @@ const MediaList: React.FC<MediaListProps> = ({
                 }`}
               />
               <CardContent sx={{ flexGrow: 1, padding: "10px 10px 0 10px" }}>
-                <Typography gutterBottom variant="h6" component="div">
+                <Typography gutterBottom variant="h6" component="h6">
                   {serviceAndMediaType[media.medium] || media.medium} -{" "}
                   {media.location}
                 </Typography>

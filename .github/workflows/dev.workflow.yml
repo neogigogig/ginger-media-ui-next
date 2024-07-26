@@ -5,6 +5,13 @@ on:
     branches:
       - main
 
+env:
+  DB_ENDPOINT: ${{ secrets.DB_ENDPOINT }}
+  DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+  DB_USERNAME: ${{ secrets.DB_USERNAME }}
+  DB_DATABASE: ${{ secrets.DB_DATABASE }}
+  BASE_URL: ${{ secrets.BASE_URL }}
+    
 jobs:
   deploy:
     runs-on: ubuntu-latest

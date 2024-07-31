@@ -27,6 +27,7 @@ const nextConfig = {
             })
           );
 
+          // fix Critical dependency erros by using the noop-module.js for few imports
           config.plugins.push(
             new webpack.NormalModuleReplacementPlugin(
               /knex\/lib\/migrations\/util\/import-file/,

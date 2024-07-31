@@ -17,7 +17,7 @@ import { serviceAndMediaType } from "@/component/mappers/service&MediaType";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { filterOptions } from "@/component/mappers/filter";
 import { Metadata } from "next/types";
-
+import { notFound } from "next/navigation";
 interface DetailsPageProps {
   params: {
     service: string;
@@ -74,7 +74,7 @@ const DetailsPage = async ({ params }: DetailsPageProps) => {
       return response;
     } catch (error) {
       console.error("Failed to fetch media details", error);
-      return null;
+      notFound()
     }
   })();
 

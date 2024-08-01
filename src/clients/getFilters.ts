@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { BaseUrl } from "./BaseUrl";
 
 export async function getFilters(service: string) {
@@ -9,7 +10,7 @@ export async function getFilters(service: string) {
   );
 
   if (!response.ok) {
-    throw new Error("Failed to fetch media details");
+    notFound()
   }
 
   return response.json();

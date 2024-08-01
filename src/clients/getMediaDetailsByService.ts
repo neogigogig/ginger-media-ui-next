@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { BaseUrl } from "./BaseUrl";
 
 export async function getMediaDetailsByService(
@@ -22,7 +23,7 @@ export async function getMediaDetailsByService(
   });
 
   if (!response.ok) {
-    throw new Error("Failed to fetch media details");
+    notFound()
   }
 
   return response.json();

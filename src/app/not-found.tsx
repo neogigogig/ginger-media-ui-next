@@ -21,7 +21,7 @@ export default function NotFound() {
           404 | Page Not Found
         </Typography>
         <Typography variant="h6" gutterBottom>
-          Sorry, we couldn't find the page you were looking for.
+          Sorry, we could not find the page you were looking for.
         </Typography>
         <Button
           variant="contained"

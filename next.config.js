@@ -51,6 +51,14 @@ const nextConfig = {
 
         return config;
       },
+      rewrites: async () => {
+        return [
+          {
+            source: '/:service-sitemap.xml',
+            destination: '/[service]-sitemap.xml', // This will ensure the service-sitemap.xml route is handled
+          },
+        ];
+      },
 }
 
 module.exports = nextConfig

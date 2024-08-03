@@ -10,7 +10,7 @@ export async function getFilters(service: string) {
   );
 
   if (!response.ok) {
-    notFound()
+    throw new Error("Failed to fetch media details");
   }
 
   return response.json();
